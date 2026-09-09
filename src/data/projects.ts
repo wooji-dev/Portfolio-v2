@@ -145,9 +145,9 @@ export const useOrderMutation = () =>
     id: "solmate",
     navLabel: "SOLMate",
     eyebrow: "SOLMate",
-    headline: "매매일지를 써야 주문할 수 있는\n모의투자 플랫폼",
+    headline: "매매일지를 써야 주문할 수 있는\n투자학습용 모의투자 플랫폼",
     lede:
-      "매매일지를 작성해야 주문 버튼이 열리는 모의투자 플랫폼입니다. \n" +
+      "매매일지를 작성해야 주문 버튼이 열리는 투자 초보자를 위한 모의투자 플랫폼입니다. \n" +
       "프론트엔드 리드로 실시간 시세가 서버에서 화면까지 도달하는 구조를 맡았습니다.",
     tone: "grey",
     slotLayout: "pair",
