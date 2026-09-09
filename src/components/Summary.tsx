@@ -6,12 +6,10 @@ export function Summary() {
     <section className="section section--alt" id="summary">
       <div className="wrap">
         <Reveal as="h2" className="h-section">
-          네 개의 프로젝트,
-          <br />
-          같은 방식.
+          프로젝트 요약
         </Reveal>
         <Reveal as="p" className="lede">
-          문제를 먼저 규정하고, 반복되는 복잡도를 한 곳에서 관리되는 구조로 바꿨습니다.
+          네 개 프로젝트에서 정의한 문제와 바꾼 내용, 결과를 정리했습니다.
         </Reveal>
 
         <div className="cards">
