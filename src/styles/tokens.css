@@ -1,0 +1,28 @@
+/* 애플 시스템 색과 타이포 값을 그대로 쓴다. 라이트 전용. */
+:root {
+  color-scheme: light;
+
+  --ground: #ffffff;
+  --ground-alt: #f5f5f7;
+  --ink: #1d1d1f;
+  --ink-2: #6e6e73;
+  --hairline: #d2d2d7;
+  --blue: #0066cc;
+  --blue-solid: #0071e3;
+  --blue-hover: #0077ed;
+  --shot: #f5f5f7;
+  --shot-line: #c7c7cc;
+  --shot-ink: #86868b;
+  --code-bg: #f5f5f7;
+  --nav-bg: rgba(255, 255, 255, 0.72);
+  --chip: #f5f5f7;
+
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    "Noto Sans KR", monospace;
+
+  --content: 980px;
+  --gutter: 22px;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+}

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1200" viewBox="0 0 2400 1200" font-family="Pretendard, 'Apple SD Gothic Neo', -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2563EB"/>
+    </marker>
+  </defs>
+
+  <rect width="2400" height="1200" fill="#FFFFFF"/>
+
+  <!-- title -->
+  <text x="140" y="132" font-size="52" font-weight="700" fill="#0F172A">연결 구조 · 탭 N개 → SharedWorker → 소켓 1개</text>
+  <text x="140" y="184" font-size="28" fill="#64748B">stompSharedWorker.ts — 탭마다 소켓을 열지 않고, 워커 하나가 STOMP 연결을 공유한다</text>
+
+  <!-- ── 브라우저 탭들 ── -->
+  <text x="140" y="300" font-size="26" font-weight="600" fill="#94A3B8" letter-spacing="2">브라우저 탭 (N개)</text>
+
+  <g>
+    <rect x="140" y="336" width="440" height="140" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="3"/>
+    <text x="180" y="398" font-size="34" font-weight="600" fill="#0F172A">탭 1</text>
+    <text x="180" y="442" font-size="24" fill="#64748B">MessagePort</text>
+
+    <rect x="140" y="530" width="440" height="140" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="3"/>
+    <text x="180" y="592" font-size="34" font-weight="600" fill="#0F172A">탭 2</text>
+    <text x="180" y="636" font-size="24" fill="#64748B">MessagePort</text>
+
+    <rect x="140" y="724" width="440" height="140" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="10 8"/>
+    <text x="180" y="786" font-size="34" font-weight="600" fill="#0F172A">탭 N</text>
+    <text x="180" y="830" font-size="24" fill="#64748B">MessagePort</text>
+  </g>
+
+  <!-- 탭 → 워커 -->
+  <path d="M580 406 H900" stroke="#64748B" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+  <path d="M580 600 H900" stroke="#64748B" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+  <path d="M580 794 H900" stroke="#64748B" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+  <text x="620" y="382" font-size="24" fill="#64748B">SUBSCRIBE / PUBLISH</text>
+
+  <!-- 워커 → 탭 (브로드캐스트) -->
+  <path d="M900 470 H580" stroke="#2563EB" stroke-width="3" fill="none" marker-end="url(#arB)"/>
+  <path d="M900 664 H580" stroke="#2563EB" stroke-width="3" fill="none" marker-end="url(#arB)"/>
+  <path d="M900 858 H580" stroke="#2563EB" stroke-width="3" fill="none" marker-end="url(#arB)"/>
+  <text x="620" y="908" font-size="24" fill="#2563EB">STOMP_MESSAGE 브로드캐스트</text>
+
+  <!-- ── SharedWorker ── -->
+  <text x="900" y="300" font-size="26" font-weight="600" fill="#94A3B8" letter-spacing="2">SharedWorker (1개)</text>
+  <rect x="900" y="336" width="620" height="528" rx="22" fill="#F1F5F9" stroke="#0F172A" stroke-width="4"/>
+  <text x="940" y="404" font-size="38" font-weight="700" fill="#0F172A">stompSharedWorker</text>
+
+  <rect x="940" y="440" width="540" height="120" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="972" y="490" font-size="28" font-weight="600" fill="#0F172A">connectedPorts</text>
+  <text x="972" y="530" font-size="24" fill="#64748B">열린 탭의 포트 집합</text>
+
+  <rect x="940" y="588" width="540" height="120" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="972" y="638" font-size="28" font-weight="600" fill="#0F172A">topicSubscriptions</text>
+  <text x="972" y="678" font-size="24" fill="#64748B">destination → 구독 탭 목록</text>
+
+  <rect x="940" y="736" width="540" height="96" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
+  <text x="972" y="786" font-size="28" font-weight="600" fill="#0F172A">STOMP Client × 1</text>
+  <text x="972" y="818" font-size="23" fill="#64748B">포트 0개가 되면 deactivate</text>
+
+  <!-- 워커 → 서버 -->
+  <path d="M1520 600 H1860" stroke="#0F172A" stroke-width="6" fill="none" marker-end="url(#ar)"/>
+  <text x="1560" y="570" font-size="30" font-weight="600" fill="#0F172A">WebSocket 1개</text>
+  <text x="1560" y="648" font-size="24" fill="#64748B">탭이 몇 개든 연결은 하나</text>
+
+  <!-- ── 서버 ── -->
+  <text x="1860" y="300" font-size="26" font-weight="600" fill="#94A3B8" letter-spacing="2">서버</text>
+  <rect x="1860" y="470" width="400" height="260" rx="22" fill="#0F172A"/>
+  <text x="1904" y="580" font-size="36" font-weight="700" fill="#FFFFFF">STOMP Broker</text>
+  <text x="1904" y="628" font-size="26" fill="#94A3B8">/ws</text>
+  <text x="1904" y="676" font-size="26" fill="#94A3B8">topic 발행</text>
+
+  <!-- 하단 요약 -->
+  <line x1="140" y1="1000" x2="2260" y2="1000" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="140" y="1064" font-size="28" fill="#334155">탭 N개 → 포트 N개 → <tspan font-weight="700" fill="#0F172A">소켓 1개</tspan></text>
+  <text x="140" y="1112" font-size="28" fill="#334155">첫 탭이 연결을 만들고, 마지막 탭이 닫히면 연결을 끊는다</text>
+</svg>
