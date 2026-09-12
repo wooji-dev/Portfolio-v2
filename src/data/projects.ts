@@ -1,508 +1,462 @@
 import type { Project } from "../types";
 
-/**
- * 프로젝트 내용. 화면을 고칠 일 없이 여기만 수정하면 된다.
- * 이미지를 채우려면 slots의 항목에 src를 넣는다.
- * 화면 녹화는 public/shots/, 캡처와 도식은 public/imgs/에 둔다.
- *
- * 본문 골격은 네 프로젝트가 같다.
- * lede(무엇을 만들었고 내 범위는 어디까지) → 정의한 문제 → 설계 → 트러블슈팅 → 결과
- */
+// Source: Notion experience record, read 2026-09-12. See docs/content-sources.md.
 export const projects: readonly Project[] = [
   {
     id: "pocketstock",
-    navLabel: "PocketStock",
-    eyebrow: "PocketStock",
-    headline: "잔돈과 포인트로\n소수점 주식을 사는 웹앱",
-    lede:
-      "카드 결제로 생기는 잔돈과 흩어진 포인트를 모아 소수점 단위로 주식을 사는 웹앱입니다. \n" +
-      "인증, 홈, 트레이딩, 포트폴리오, CMA, 환전 화면과 상태관리 구조를 맡았고, " +
-      "PM으로 범위와 일정을 관리했습니다.",
+    navLabel: "Pocket Stock",
+    eyebrow: "Pocket Stock",
+    category: "Finance",
+    year: "2026",
+    headline: "작은 잔돈이\n투자가 되는 경험",
+    shortDescription:
+      "잔돈과 포인트를 모으는 소수점 투자 웹앱. 전 화면과 거래 인증을 개발했습니다.",
+    lede: "카드 결제 잔돈과 포인트로 소수점 주식에 투자하는 모바일 중심 웹앱입니다. 프론트엔드 전체와 User / Security 백엔드, 거래 인증을 맡았습니다.",
     tone: "light",
     slotLayout: "phone",
-    slots: [
-      {
-        kind: "phone",
-        title: "홈 화면, 잔돈 수집과 CMA 적립",
-        hint: "화면 녹화",
-        size: { w: 540, h: 1174 },
-        video: {
-          webm: "shots/pocketstock-1.webm",
-          mp4: "shots/pocketstock-1.mp4",
-        },
-        poster: "shots/pocketstock-1.jpg",
-        alt: "카드 사용 잔돈과 포인트를 모아 CMA에 적립하는 홈 화면",
+    tags: ["Next.js", "TypeScript", "Spring Boot"],
+    github: "https://github.com/PocketStock-PDA",
+    highlight: "최종 프로젝트 최우수상",
+    slots: [1, 2, 3].map((n) => ({
+      kind: "phone" as const,
+      title:
+        ["홈과 잔돈 적립", "트레이딩", "포트폴리오"][n - 1] ?? "서비스 화면",
+      hint: "실제 서비스 화면",
+      size: { w: 540, h: 1174 },
+      video: {
+        webm: `shots/pocketstock-${n}.webm`,
+        mp4: `shots/pocketstock-${n}.mp4`,
       },
-      {
-        kind: "phone",
-        title: "트레이딩 화면, 조각 모으기",
-        hint: "화면 녹화",
-        size: { w: 540, h: 1174 },
-        video: {
-          webm: "shots/pocketstock-2.webm",
-          mp4: "shots/pocketstock-2.mp4",
-        },
-        poster: "shots/pocketstock-2.jpg",
-        alt: "소수점 매수를 퍼즐 조각으로 표현한 트레이딩 화면",
-      },
-      {
-        kind: "phone",
-        title: "포트폴리오 화면, 퍼즐 현황과 온주 전환",
-        hint: "화면 녹화",
-        size: { w: 540, h: 1174 },
-        video: {
-          webm: "shots/pocketstock-3.webm",
-          mp4: "shots/pocketstock-3.mp4",
-        },
-        poster: "shots/pocketstock-3.jpg",
-        alt: "모은 조각이 100개가 되면 온주로 전환되는 포트폴리오 화면",
-      },
-    ],
+      poster: `shots/pocketstock-${n}.jpg`,
+      alt: `Pocket Stock ${["홈", "트레이딩", "포트폴리오"][n - 1]} 화면`,
+    })),
     meta: [
+      { label: "기간", value: "2026.05.28 — 2026.07.02" },
       {
-        label: "역할",
-        value:
-          "PM, 프론트엔드 전담. 인증, 홈, 트레이딩, 포트폴리오, CMA, 환전 화면과 상태관리 구조 설계",
+        label: "환경",
+        value: "신한투자증권 프로디지털아카데미 7기 / 팀 프로젝트",
       },
       {
-        label: "스택",
-        value:
-          "Next.js 15 App Router, TypeScript, TanStack Query, Zustand, Framer Motion, PWA",
+        label: "담당",
+        value: "프론트엔드 전담, User / Security 백엔드, 거래 인증",
       },
       {
-        label: "기간",
+        label: "기술",
         value:
-          "2026년 5월 28일 ~ 7월 2일, 신한투자증권 프로디지털아카데미 팀 프로젝트",
+          "Next.js 15, TanStack Query, Zustand, decimal.js, Java 17, Spring Boot, MySQL, Redis",
       },
-      { label: "성과", value: "최종 발표회 최우수상" },
     ],
     blocks: [
       {
-        heading: "정의한 문제",
+        heading: "문제",
         paragraphs: [
-          "소수점 투자는 금액이 나누어떨어지지 않습니다. JavaScript에서 0.1 + 0.2는 0.30000000000000004가 됩니다. 이 값은 화면에 정상으로 표시되고 예외도 나지 않기 때문에, 잔고가 조금씩 어긋나도 드러나지 않습니다.",
-          "재시도 동작에도 같은 성격의 위험이 있었습니다. TanStack Query는 요청이 실패하면 자동으로 다시 보냅니다. 조회에서는 문제가 없지만 송금이나 주문에서 타임아웃 뒤 재시도가 걸리면 출금이 두 번 일어납니다.",
-          "두 가지 모두 화면을 만들기 전에 처리해야 할 문제로 봤습니다.",
+          "금융 화면은 소수점 금액의 오차와 중복 요청을 함께 고려해야 합니다. 주문이나 송금 요청이 실패했을 때 자동으로 다시 보내면 의도하지 않은 거래로 이어질 수 있습니다.",
         ],
       },
       {
-        heading: "설계",
+        heading: "구현",
         paragraphs: [
-          "두 위험은 정확성을 지키는 책임이 화면을 만드는 사람에게 있다는 공통점이 있었습니다.",
-          "팀 규칙으로 정해도 화면이 늘어나면 빠뜨리는 곳이 생깁니다. 규칙 대신 코드 구조로 막기로 했습니다.",
-        ],
-        bullets: [
-          "금액을 number로 계산하는 경로를 없앴습니다. 모든 금액 연산과 표시가 currency.ts 한 곳을 지나가기 때문에 화면이 늘어나도 계산 규칙은 한 곳에 있습니다.",
-          "이중 출금이 가능한 지점을 한 곳으로 모았습니다. 돈이 오가는 mutation은 retry: false로 고정하고, 주문은 useOrderMutation 하나만 거치게 했습니다.",
+          "인증, 홈, 자산, 포트폴리오, 가계부, 트레이딩, CMA, 환전 등 전 화면을 구현했습니다. 서버 상태는 TanStack Query, 화면 상태는 Zustand로 나누고 데이터 종류별 캐시 정책을 적용했습니다.",
+          "금액 계산을 decimal.js로 통일했습니다. 주문과 송금 요청의 자동 재시도를 비활성화하고 중복 요청을 방지했습니다. HttpOnly 쿠키와 CSRF 대응 헤더, 서버 전용 환경변수 분리를 적용했습니다.",
         ],
       },
       {
-        heading: "트러블슈팅",
+        heading: "거래 인증",
         paragraphs: [
-          {
-            lead: "금액 파싱",
-            text: "currency.ts를 만든 뒤에도 잔고가 미세하게 어긋났습니다. 화면 계산은 Decimal을 쓰는데, 서버 응답을 JSON.parse로 받는 시점에 금액이 이미 number로 바뀌어 있었습니다. 응답 스키마에서 금액 필드를 문자열로 받고, 파싱 계층에서 Decimal로 바꾼 뒤에만 상태에 넣도록 경로를 고정했습니다.",
-          },
-          {
-            lead: "중복 주문",
-            text: "retry: false로 자동 재시도는 막았지만, 주문 버튼을 빠르게 두 번 누르면 mutation이 두 번 나갔습니다. 네트워크가 느릴수록 응답 대기 시간이 길어져 재현이 쉬웠습니다. useOrderMutation에서 isPending 동안 제출을 막고, 요청마다 클라이언트가 만든 멱등키를 실어 보내 서버가 같은 주문을 한 번만 처리하도록 했습니다.",
-          },
-          {
-            lead: "잔고 롤백",
-            text: "매수 직후 잔고를 먼저 줄여 보여줬는데, 주문이 실패해도 화면 값이 되돌아오지 않는 경우가 있었습니다. 잔고를 여러 쿼리가 각자 캐싱하고 있어서 롤백이 일부에만 적용된 것이 원인이었습니다. 잔고 쿼리 키를 하나로 합치고, onError에서 스냅샷을 되돌린 뒤 onSettled에서 무효화하도록 정리했습니다.",
-          },
+          "Servlet Filter 기반 JWT 인증과 Redis 세션 기반 거래 인증을 구현했습니다. KEEP과 ONCE를 구분하고 getAndDelete로 일회성 인증값을 원자적으로 소비하도록 했습니다. 인증 모듈은 core와 ledger 앱이 함께 사용하도록 분리했습니다.",
         ],
       },
       {
         heading: "결과",
         paragraphs: [
-          "금액 오차는 소수점 매수, 부분 체결, 환전, CMA 적립을 섞은 시나리오를 실행한 뒤 화면 잔고와 서버 잔고를 대조해 확인했습니다. 중복 주문은 버튼 연타와 네트워크 지연을 재현해 서버에 도달한 주문 건수를 세어 확인했습니다.",
-          "개발 기간 동안 두 검사에서 어긋난 건은 나오지 않았습니다.",
-          "트레이딩, CMA, 환전 화면을 차례로 추가하는 동안 금액 관련 버그는 새로 생기지 않았고, 코드 리뷰에서 금액 처리를 매번 확인하지 않아도 됐습니다.",
+          "모바일 웹앱의 전 화면과 거래 인증 흐름을 연결했습니다. 팀은 2026년 7월 2일 최종 프로젝트 발표회에서 최우수상을 받았습니다.",
         ],
       },
     ],
-    code: {
-      afterBlock: 1,
-      sample: {
-        caption: "금액 정밀도와 이중 출금 방지",
-        code: `import Decimal from "decimal.js";
-
-// 금액 연산은 이 파일로만 지나갑니다. 화면에서 number 산술을 쓰지 않습니다
-export const addAmount = (a: string, b: string) =>
-  new Decimal(a).plus(b).toFixed(2);
-
-// 돈이 오가는 요청은 자동 재시도를 끕니다. 재시도는 사용자가 직접 누를 때만
-export const useOrderMutation = () =>
-  useMutation({ mutationFn: postOrder, retry: false });`,
-      },
-    },
-    insight:
-      "지켜야 할 규칙이 늘어나면 빠뜨릴 가능성도 함께 늘어납니다. 규칙을 정하기 전에 그 규칙이 필요 없어지는 구조가 있는지 먼저 확인하게 됐습니다.",
+    insight: "금액 계산, 상태 관리, 거래 인증을 화면 개발과 함께 설계했습니다.",
   },
-
+  {
+    id: "aiops",
+    navLabel: "AIOps Agent",
+    eyebrow: "AIOps Agent",
+    category: "AI & Automation",
+    year: "2026",
+    headline: "운영 로그에\n판단의 근거를 더하다",
+    shortDescription:
+      "룰 기반 판별과 비동기 LLM 분석을 분리한 로그 분석 AI Agent.",
+    lede: "Tmax TP 로그의 에러와 위험도를 판별하고 15분 단위 이상 패턴을 확인하는 사내 AI Agent입니다. 기획부터 설계, 개발, 최종 발표까지 단독 수행했습니다.",
+    tone: "grey",
+    slotLayout: "single",
+    tags: ["Java", "Spring Boot", "Dify"],
+    github: "https://github.com/wooji-dev/AIOps",
+    highlight: "기획부터 발표까지 단독 수행",
+    slots: [
+      {
+        kind: "natural",
+        title: "운영 대시보드",
+        hint: "실제 프로젝트 캡처",
+        src: "imgs/aiops-dashboard.png",
+        size: { w: 904, h: 597 },
+        alt: "위험도와 이상 패턴의 근거를 확인하는 AIOps 대시보드",
+      },
+      {
+        kind: "natural",
+        title: "미등록 로그 판별",
+        hint: "Dify 워크플로우",
+        src: "imgs/aiops-dify-1.png",
+        size: { w: 1760, h: 424 },
+      },
+      {
+        kind: "natural",
+        title: "이상 패턴 분석",
+        hint: "Dify 워크플로우",
+        src: "imgs/aiops-dify-2.png",
+        size: { w: 1762, h: 394 },
+      },
+    ],
+    meta: [
+      { label: "기간", value: "2026.07.27 — 2026.09.04" },
+      { label: "환경", value: "신한투자증권 ICT기획운영부 인턴 프로젝트" },
+      { label: "담당", value: "기획, 설계, 개발, 최종 발표 단독 수행" },
+      {
+        label: "기술",
+        value:
+          "Java 17, Spring Boot 3.5.5, Thymeleaf, JPA, H2, Dify, Ollama qwen3:8b",
+      },
+    ],
+    blocks: [
+      {
+        heading: "문제",
+        paragraphs: [
+          "등급 구분 없이 전달되는 알림 속에 중요한 로그가 묻혔습니다. 에러 사전과 매뉴얼이 로그에 연결되지 않아 같은 에러도 담당자가 매번 다시 확인해야 했습니다. 단건 로그를 시간 단위로 묶어 패턴을 살펴볼 흐름도 필요했습니다.",
+        ],
+      },
+      {
+        heading: "설계",
+        paragraphs: [
+          "로그 수신, 사전 조회, 룰 기반 위험도 계산, 저장, 화면 출력을 주 처리 경로로 구성했습니다. 미등록 로그의 LLM 검토는 비동기로 분리하고 운영자가 승인한 내용만 사전에 등록하도록 했습니다.",
+          "15분 집계 분석에는 LLM과 보조 룰을 연결했습니다. 타임아웃, 유계 큐와 매뉴얼 폴백을 적용하고, 6개 화면에서 원본 로그와 판정 근거를 함께 확인할 수 있게 했습니다.",
+        ],
+      },
+      {
+        heading: "지연과 검증",
+        paragraphs: [
+          "개발 환경에서 최대 392초의 판별 지연을 분석했습니다. 사고 토큰을 줄이고 모델 유지 시간을 조정했으며, 타임아웃과 비동기 분리로 지연이 주 처리 경로에 미치는 영향을 줄이도록 구성했습니다.",
+          "시나리오 10종의 로그 시뮬레이터를 만들어 파이프라인, 룰 발화와 폴백을 확인하는 시간을 1시간에서 30초로 줄였습니다. 이 수치는 개발 환경의 흐름 검증 시간입니다.",
+        ],
+      },
+      {
+        heading: "구현 결과와 남은 검증",
+        paragraphs: [
+          "워크플로우 2종과 화면 6종을 구현하고 최종 발표를 마쳤습니다. 실 Elasticsearch 연동과 라벨 기반 탐지 정확도 검증은 미완료입니다. 디스크 우선 저장 및 비동기 큐 개선 후 장기 중단 재현 테스트도 남아 있습니다.",
+        ],
+      },
+    ],
+    insight: "LLM의 판단을 운영자 승인과 검증 절차에 연결했습니다.",
+  },
   {
     id: "solmate",
     navLabel: "SOLMate",
     eyebrow: "SOLMate",
-    headline: "매매일지를 써야 주문할 수 있는\n투자학습용 모의투자 플랫폼",
-    lede:
-      "매매일지를 작성해야 주문 버튼이 열리는 투자 초보자를 위한 모의투자 플랫폼입니다. \n" +
-      "프론트엔드 리드로 실시간 시세가 서버에서 화면까지 도달하는 구조를 맡았습니다.",
+    category: "Finance",
+    year: "2026",
+    headline: "거래의 흐름과\n학습을 연결하다",
+    shortDescription:
+      "매매일지와 멘토링을 연결한 모의투자 플랫폼. 동시 주문과 실시간 시세를 다뤘습니다.",
+    lede: "청소년과 초보 투자자가 모의투자, 매매일지, 멘토 피드백으로 투자 판단을 연습하는 플랫폼입니다. 화면과 백엔드를 개발하고 인증, 동시성, 시세 처리 구조를 설계했습니다.",
     tone: "grey",
     slotLayout: "pair",
+    tags: ["React", "Redis", "PostgreSQL"],
+    github: "https://github.com/Agile-Driven-High-quality-Developers",
+    highlight: "동시 주문 정합성 / 실시간 시세",
     slots: [
       {
         kind: "wide",
-        title: "PC 화면, 종목 상세와 실시간 호가",
-        hint: "데스크톱 캡처",
+        title: "종목 상세와 실시간 호가",
+        hint: "실제 서비스 캡처",
         src: "imgs/solmate-desktop.png",
         size: { w: 2880, h: 1800 },
-        alt: "차트와 호가, 보유 현황이 실시간으로 갱신되는 종목 상세 화면",
+        alt: "SOLMate의 차트와 주문 화면",
       },
       {
         kind: "phone",
-        fit: "contain",
-        title: "모바일 화면, 매매일지",
-        hint: "모바일 캡처",
+        title: "모바일 매매일지",
+        hint: "실제 서비스 캡처",
         src: "imgs/solmate-mobile.png",
         size: { w: 1206, h: 2622 },
-        alt: "매매일지를 작성해야 주문 버튼이 열리는 모바일 화면",
+        fit: "contain",
       },
       {
         kind: "natural",
         span: "full",
-        title: "연결 구조, 탭 N개에서 SharedWorker를 거쳐 소켓 1개로",
-        hint: "직접 그린 도식",
+        title: "SharedWorker 연결 구조",
+        hint: "기존 포트폴리오 도식",
         src: "imgs/shared-worker-connection.svg",
         size: { w: 2400, h: 1200 },
-        alt: "여러 탭이 MessagePort로 SharedWorker에 붙고, 워커가 STOMP 소켓 하나만 서버에 연결하는 구조도",
       },
     ],
     meta: [
+      { label: "기간", value: "2026.03.09 — 2026.04.03" },
       {
-        label: "역할",
-        value:
-          "프론트엔드 리드. 실시간 시세 소비 구조(SharedWorker 단일 연결, 구독 관리, 재연결) 전담",
+        label: "환경",
+        value: "신한투자증권 프로디지털아카데미 7기 / 팀 프로젝트",
       },
       {
-        label: "스택",
-        value:
-          "React, Vite, TypeScript, Zustand, Tailwind(디자인 토큰), STOMP/WebSocket, SharedWorker",
+        label: "담당",
+        value: "프론트엔드, 백엔드, 인증, 동시성 및 시세 처리 설계",
       },
       {
-        label: "기간",
+        label: "기술",
         value:
-          "2026년 3월 9일 ~ 4월 3일, 신한투자증권 프로디지털아카데미 팀 프로젝트",
+          "React, TypeScript, Zustand, Spring Boot, PostgreSQL, Redis, WebSocket, SharedWorker",
       },
     ],
     blocks: [
       {
-        heading: "정의한 문제",
+        heading: "문제",
         paragraphs: [
-          "사용자는 종목마다 탭을 따로 띄우는데, 구현은 탭 하나만 가정하고 있었습니다. 탭을 열 때마다 STOMP WebSocket이 새로 연결되어 같은 시세를 여러 번 받았고, 연결 수가 사용자 수와 탭 수의 곱으로 늘어났습니다.",
-          "매일 장 시작 무렵에만 시세가 화면에 들어오지 않는 증상도 있었습니다. 콘솔에 에러가 없고 소켓도 연결된 상태로 보여서 장애로 신고되지 않았습니다.",
-          "증상이 나타나는 시각과 액세스 토큰 만료 주기가 겹치는 것을 보고 토큰 쪽을 확인했습니다. 토큰을 새로 받으면 연결은 다시 맺어지지만, 끊기기 전에 구독하던 종목 목록은 복구되지 않았습니다.",
+          "동시에 들어온 주문이 같은 잔고를 중복으로 사용하면 보유 금액을 넘는 주문이 체결될 수 있습니다. 실시간 시세는 여러 서버와 브라우저 탭에서 불필요하게 중복 수신하지 않도록 관리해야 했습니다.",
         ],
       },
       {
-        heading: "설계",
+        heading: "거래 정합성",
         paragraphs: [
-          "두 문제 모두 각 화면이 연결을 직접 관리하는 구조에서 나왔습니다. 탭마다 연결하는 대신 브라우저당 하나만 연결하고, 종목별로 구독 중인 탭 수를 세는 방식으로 바꿨습니다.",
-          "화면에서 쓰는 함수는 subscribe(topic)과 unsubscribe(topic) 두 개입니다. 연결 개수와 재연결 시점, 토큰 갱신은 화면이 다루지 않습니다.",
-        ],
-        bullets: [
-          "STOMP 클라이언트를 SharedWorker 안에 하나만 두고, 모든 탭이 MessagePort로 그 하나를 같이 씁니다.",
-          "종목별로 구독 중인 탭을 세서 마지막 탭이 나가면 구독을 끊습니다. 모든 탭이 닫히면 연결도 종료해 좀비 커넥션이 남지 않습니다.",
-          "재연결 후 재구독도 워커가 처리합니다. 토큰을 새로 받아 연결이 다시 맺어지면 워커가 갖고 있던 구독 목록을 그대로 다시 등록합니다.",
+          "Redis 분산 락과 DB 비관적 락을 적용했습니다. 계좌 조회부터 잔고 차감, 주문 생성과 거래 내역 기록을 하나의 트랜잭션으로 묶었습니다. 매매일지는 DB에 미체결 상태로 먼저 저장하고 체결 및 취소에 맞춰 상태를 변경했습니다.",
         ],
       },
       {
-        heading: "트러블슈팅",
+        heading: "실시간 데이터",
         paragraphs: [
-          {
-            lead: "닫힌 탭의 잔여 구독",
-            text: "unsubscribe는 컴포넌트 언마운트에서 호출했는데, 탭을 그냥 닫거나 브라우저가 강제 종료되면 실행되지 않았습니다. 워커에는 이미 사라진 탭의 MessagePort가 구독자로 남아 시세를 계속 받았습니다. 워커가 각 포트에 주기적으로 핑을 보내고, 응답이 없는 포트는 구독 목록에서 제거하도록 바꿨습니다.",
-          },
-          {
-            lead: "리렌더 증가",
-            text: "연결을 하나로 줄인 뒤에는 화면이 버벅였습니다. 워커가 메시지를 받을 때마다 스토어를 갱신해서, 관심 종목을 여러 개 열어두면 초당 수십 번씩 목록 전체가 다시 그려졌습니다. 워커에서 프레임 단위로 tick을 모아 한 번에 보내고, 스토어를 종목별로 쪼개 값이 바뀐 행만 다시 그리도록 했습니다.",
-          },
-          {
-            lead: "개발 환경 중복 구독",
-            text: "HMR로 화면을 고쳐도 SharedWorker는 살아 있어서, 저장할 때마다 구독이 쌓이고 같은 시세가 여러 번 들어왔습니다. 운영에서는 나지 않는 증상이라 원인을 찾는 데 시간이 걸렸습니다. 개발 모드에서는 HMR dispose 시점에 포트를 명시적으로 끊게 하고, 워커에 현재 구독 상태를 덤프하는 디버그 메시지를 넣었습니다.",
-          },
+          "Redis와 PostgreSQL로 실시간 시세와 과거 차트 데이터를 나누어 관리하고 상위 캔들을 사전 집계했습니다. 서버의 시세 수신을 공유하고 브라우저에서는 SharedWorker로 여러 탭의 WebSocket 연결을 하나로 유지했습니다.",
         ],
       },
       {
-        heading: "결과",
+        heading: "구현 범위",
         paragraphs: [
-          "연결 수는 개발자도구 네트워크 탭의 WS 커넥션과 서버 측 활성 세션을 대조해 확인했습니다. 탭을 여러 개 열고 닫기를 반복해도 연결은 1개로 유지되고, 모든 탭을 닫으면 0개가 됩니다.",
-          "연결과 트래픽이 탭 수만큼 늘어나던 문제가 없어졌고, 좀비 커넥션도 남지 않습니다.",
-          "장 시작 무렵 시세가 멈추는 증상은 토큰 만료를 강제로 앞당겨 재현했고, 재구독을 워커로 옮긴 뒤로는 재현되지 않았습니다. 소켓 처리 코드가 워커로 모이면서 화면 컴포넌트에서는 관련 코드가 빠졌습니다.",
+          "온보딩, 매매일지가 포함된 주문, 멘토와 멘티 매칭, 알림 화면을 구현했습니다. 사용자와 로그인 유형, 토큰 사이의 순환 참조를 해소하고 JWT 인증과 토큰 저장소를 정리했습니다.",
         ],
       },
     ],
-    code: {
-      afterBlock: 1,
-      sample: {
-        caption: "SharedWorker 단일 연결과 구독 카운팅",
-        code: `// shared-socket.worker.ts. 브라우저당 STOMP 연결 1개
-const ports = new Map<string, Set<MessagePort>>();   // 종목별 구독 중인 탭
-let client: StompClient | null = null;
-
-onconnect = (e) => {
-  const port = e.ports[0];
-  port.onmessage = ({ data }) => {
-    if (data.type === "subscribe") {
-      if (!ports.has(data.topic)) ports.set(data.topic, new Set());
-      ports.get(data.topic).add(port);
-      client ??= connect();                     // 최초 1회만 연결
-    }
-    if (data.type === "unsubscribe") {
-      ports.get(data.topic)?.delete(port);
-      if (!ports.get(data.topic)?.size) client?.unsubscribe(data.topic);
-      if (![...ports.values()].some((s) => s.size)) client?.deactivate();
-    }
-  };
-};
-
-// 토큰을 새로 받아 재연결되면 갖고 있던 구독을 그대로 다시 등록합니다
-function onReconnect() {
-  for (const topic of ports.keys()) client?.subscribe(topic);
-}`,
-      },
-    },
-    insight:
-      "에러 없이 조용히 멈추는 장애는 로그만으로 찾기 어려웠습니다. 토큰 갱신이나 재연결처럼 상태가 바뀌는 시점에 무엇이 유실되는지 먼저 확인하게 됐습니다.",
+    insight: "화면의 주문 상태와 서버의 거래 상태를 함께 다뤘습니다.",
   },
-
   {
     id: "mcp",
-    navLabel: "디자인 자동화",
-    eyebrow: "디자인 자동화 도구",
-    headline: "Figma 시안을 코드로 바꾸는\nMCP 서버",
-    lede:
-      "반복되던 Figma 시안 코드 변환을 LLM이 직접 도구를 호출해 처리하도록 만든 도구입니다. \n" +
-      "배정받은 업무가 아니라 부서에서 반복되던 작업을 문제로 잡고 기획부터 구현까지 진행했습니다.",
+    navLabel: "Figma MCP",
+    eyebrow: "Figma MCP",
+    category: "AI & Automation",
+    year: "2024—25",
+    headline: "디자인에서 코드까지,\n반복을 줄이는 도구",
+    shortDescription:
+      "Figma 정보를 조회하고 퍼블리싱을 돕는 MCP 도구 7개를 설계하고 구현했습니다.",
+    lede: "Figma 디자인을 AI 에이전트가 조회하고 HTML, CSS, JavaScript로 변환할 수 있도록 MCP 서버를 개발했습니다. 기존 오픈소스를 바탕으로 퍼블리싱 실무에 필요한 기능을 확장했습니다.",
     tone: "light",
     slotLayout: "single",
+    tags: ["TypeScript", "MCP SDK", "Figma API"],
+    github: "https://github.com/wooji-dev/figmaMCP_server",
+    highlight: "MCP 도구 7개 설계 및 구현",
     slots: [
       {
         kind: "natural",
-        title: "아키텍처, 업로더에서 도구 호출을 거쳐 HTML까지",
-        hint: "직접 그린 도식",
+        title: "디자인 자동화 파이프라인",
+        hint: "기존 포트폴리오 도식",
         src: "imgs/mcp-architecture.png",
         size: { w: 3120, h: 1520 },
-        alt: "업로더, API, 멀티모달 변환, 모델 호출로 이어지는 파이프라인과 입력 시안 대비 생성된 HTML 예시",
+        alt: "Figma 정보를 조회하고 코드 변환에 연결하는 아키텍처",
       },
     ],
     meta: [
+      { label: "기간", value: "2024.10 — 2025.03" },
+      { label: "환경", value: "에코마케팅 마케팅테크팀" },
+      { label: "담당", value: "기획, MCP 도구 7개 단독 설계 및 구현" },
       {
-        label: "역할",
-        value:
-          "기획부터 단독 진행. MCP 서버와 Figma REST API 도구 7종 설계 및 구현",
-      },
-      {
-        label: "스택",
-        value: "LLM, MCP(Model Context Protocol) 서버, Figma REST API, Node.js",
-      },
-      {
-        label: "기간",
-        value: "2024년 10월 ~ 2025년 3월, 에코마케팅 사이드 프로젝트",
+        label: "기술",
+        value: "TypeScript, Node.js, MCP SDK, Zod, Figma REST API, dotenv",
       },
     ],
     blocks: [
       {
-        heading: "정의한 문제",
+        heading: "문제",
         paragraphs: [
-          "캠페인 페이지는 매주 새로 나오는데 작업 방식은 매번 같았습니다. 어떤 프레임이 섹션인지, 어떤 텍스트가 어떤 태그인지, 어떤 색이 어떤 CSS 값인지 판단하는 기준은 거의 고정되어 있었습니다. 기준이 정해져 있으니 자동화할 수 있다고 봤습니다.",
-          "처음에는 시안 이미지나 파일 전체를 프롬프트에 넣었습니다. 노드 계층이 깊으면 컨텍스트 윈도우를 넘겼고, 벡터 그룹과 오토레이아웃이 섞이면 CSS 변환이 자주 틀렸습니다. 같은 시안에서도 무엇을 어떤 순서로 읽느냐에 따라 다른 코드가 나왔습니다.",
-          "정확도보다는 결과가 일정하지 않은 것이 문제였고, 더 큰 모델을 써도 해결되지 않는다고 판단했습니다.",
+          "Figma 시안에서 구조와 스타일을 확인하고 코드와 결과 파일을 정리하는 작업이 반복됐습니다. 에이전트가 디자인 정보를 조회하고 코드 변환에 활용할 수 있도록 실무 작업을 도구로 나눴습니다.",
         ],
       },
       {
-        heading: "설계",
+        heading: "구현",
         paragraphs: [
-          '원인은 LLM에 범위가 정해지지 않은 작업을 통째로 맡긴 데 있었습니다. "이 파일을 코드로 바꿔줘"는 입력 크기도 판단 기준도 출력 형태도 정해져 있지 않습니다. 프롬프트를 고치는 대신 LLM이 작업하는 방식을 바꿨습니다.',
-        ],
-        bullets: [
-          "MCP 서버를 직접 만들어 Figma REST API를 도구 7개로 나눠 열었습니다. LLM은 파일 전체를 읽지 않고 필요한 노드나 스타일만 골라서 도구를 호출합니다.",
-          "전체 트리를 프롬프트에 넣지 않고 필요한 만큼만 조회하게 바꿔서, 시안이 복잡해져도 컨텍스트가 넘치지 않습니다.",
-          "LLM이 할 일과 코드가 할 일을 나눴습니다. 어떤 노드 묶음이 하나의 섹션인지는 맥락이 필요하니 LLM에 맡기고, 색상값과 크기를 CSS로 옮기는 일은 함수로 처리합니다.",
+          "파일 구조, 컴포넌트와 스타일 조회, 텍스트와 개발 지시사항 추출, CSS 제안, 이미지 다운로드를 처리하는 도구 7개를 구현했습니다. 색상과 테두리, 글꼴 속성을 CSS로 변환하고 노드 유형에 맞는 HTML 태그를 제안하도록 구성했습니다.",
+          "결과 파일을 정리하고 README를 생성하는 패키징 기능도 만들었습니다.",
         ],
       },
       {
-        heading: "트러블슈팅",
+        heading: "통신과 입력 처리",
         paragraphs: [
-          {
-            lead: "과다한 도구 호출",
-            text: "트리를 부분 조회하게 바꾸자 LLM이 자식 노드를 따라 계속 내려가면서, 시안 하나를 변환하는 데 수십 번씩 API를 호출했습니다. 깊이와 호출 횟수에 상한을 두고, 노드 조회 도구가 자식 목록을 요약해서 함께 돌려주도록 바꿨습니다. 한 번의 응답으로 다음에 열어볼 노드를 판단할 수 있게 되면서 호출 수가 줄었습니다.",
-          },
-          {
-            lead: "도구 응답 크기",
-            text: "노드 하나만 조회해도 Figma 응답에는 쓰지 않는 필드가 대부분이었습니다. 파일 전체를 넣지 않기로 해놓고 도구 응답으로 컨텍스트를 다시 채우고 있었습니다. 도구가 돌려주는 필드를 화이트리스트로 고정하고 나머지는 잘라냈습니다.",
-          },
-          {
-            lead: "레이트 리밋",
-            text: "호출이 몰리면 Figma REST API가 429를 돌려주고 변환이 중간에 멈췄습니다. 파일 버전 키를 기준으로 노드 응답을 캐시하고, 429에는 지수 백오프로 재시도하도록 했습니다. 시안을 고쳐가며 여러 번 변환하는 사용 패턴에서는 호출이 대부분 캐시로 처리됩니다.",
-          },
+          "MCP 통신에 쓰이는 stdout과 진단 로그를 출력하는 stderr를 분리했습니다. Figma URL의 file 및 design 형식을 모두 처리하고, 인증 토큰이 없으면 초기화 단계에서 종료하도록 했습니다.",
         ],
       },
       {
         heading: "결과",
         paragraphs: [
-          "같은 시안에서 같은 결과가 나오면서 검수 시간이 줄었고, 부서 퍼블리싱 업무 시간이 약 40% 줄었습니다.",
-          "이 값은 도구를 쓰기 전과 후로 같은 유형의 캠페인 페이지 작업 시간을 비교해 냈습니다. 시안을 받은 시점부터 검수를 마칠 때까지를 재서 평균을 냈고, 표본이 많지 않아 정밀한 수치는 아닙니다.",
-          "마케터와 디자이너, 개발자가 같은 도구로 결과물을 만들면서 시안과 결과물이 다르다는 지적도 줄었습니다.",
+          "디자인 정보 조회부터 결과물 정리까지 반복 작업을 도구 호출로 연결했습니다. 경험 기록에는 도구 활용으로 부서 업무 시간이 약 40% 단축된 것으로 정리되어 있습니다.",
         ],
       },
     ],
-    code: {
-      afterBlock: 1,
-      sample: {
-        caption: "추론 대신 코드로 처리한 변환 계층",
-        code: `// 속성을 CSS로 옮기는 일은 LLM에 맡기지 않고 함수로 처리합니다
-function extractCssStyles(node) {
-  const css = {};
-  const fill = node.fills?.[0];
-  if (fill?.type === "SOLID") {
-    const { r, g, b } = fill.color;
-    css.backgroundColor = \`rgb(\${r * 255 | 0}, \${g * 255 | 0}, \${b * 255 | 0})\`;
-  }
-  if (node.cornerRadius) css.borderRadius = \`\${node.cornerRadius}px\`;
-  return css;
-}
-
-// 노드 타입을 태그로 바꾸는 것도 표로 고정합니다
-const toSemanticTag = (node) =>
-  ({ TEXT: "p", FRAME: "section", COMPONENT: "div" })[node.type] ?? "div";`,
-      },
-    },
-    insight:
-      "LLM을 쓸 때는 모델 성능보다 어디까지 맡길지 정하는 일이 결과에 더 큰 영향을 줬습니다. 프롬프트를 정교하게 쓰는 것보다 맡길 범위를 좁히는 편이 효과가 컸습니다.",
+    insight: "반복되는 퍼블리싱 절차를 호출 가능한 도구로 만들었습니다.",
   },
-
   {
-    id: "aiops",
-    navLabel: "AIOps",
-    eyebrow: "AIOps Agent",
-    headline: "운영 로그를 판별하는\n사내 AI Agent",
-    lede:
-      "운영 로그를 판별하고 위험도를 계산하고 이상 패턴을 탐지하는 사내 AI Agent입니다. \n" +
-      "기획, 설계, 개발, 최종 발표를 단독으로 수행했습니다.",
+    id: "elo",
+    navLabel: "ELO",
+    eyebrow: "ELO",
+    category: "Web & Data",
+    year: "2025",
+    headline: "고객의 행동을\n더 정확하게 읽다",
+    shortDescription:
+      "쇼핑몰의 URL 정규화와 테스트 그룹 유지, 리다이렉트 예외 처리를 구현했습니다.",
+    lede: "쇼핑몰 방문자를 URL과 UTM 유입 정보로 구분하고 원본과 대안 페이지의 행동을 비교하는 A/B 테스트 플랫폼입니다. 프론트엔드와 테스트 배정, 리다이렉트 로직을 맡았습니다.",
+    tone: "light",
+    slotLayout: "single",
+    tags: ["JavaScript", "A/B Testing", "Analytics"],
+    highlight: "전환율 2.7% → 3.9%",
+    slots: [],
+    meta: [
+      { label: "기간", value: "2025.06 — 2025.12" },
+      { label: "환경", value: "에코마케팅 마케팅테크팀 / 팀 프로젝트" },
+      { label: "담당", value: "프론트엔드 및 리다이렉트 로직 설계, 개발" },
+      {
+        label: "기술",
+        value:
+          "Vanilla JavaScript, Cookie, sessionStorage, URLSearchParams, Fetch",
+      },
+    ],
+    blocks: [
+      {
+        heading: "문제",
+        paragraphs: [
+          "자사몰마다 쿼리스트링과 경로 규칙이 달라 같은 페이지를 다르게 인식할 수 있었습니다. 새로고침이나 재방문 때 테스트 그룹이 바뀌거나 중복 리다이렉트가 일어나면 비교 데이터도 어긋납니다.",
+        ],
+      },
+      {
+        heading: "구현",
+        paragraphs: [
+          "URL을 정규화하고 최초 유입 UTM을 세션에 보존했습니다. 가중치로 배정한 테스트 그룹은 쿠키에 저장해 유지하고, 만료일을 테스트 종료일에 맞췄습니다. 같은 페이지로의 중복 리다이렉트와 무한 루프를 방지했습니다.",
+          "데이터 엔지니어와 이벤트 로그 형식을 맞추고 URL 인식 오류는 Teams 웹훅으로 알렸습니다. 외부 설정 조회가 실패해도 쇼핑몰 페이지가 동작하도록 예외 처리했습니다.",
+        ],
+      },
+      {
+        heading: "결과",
+        paragraphs: [
+          "A/B 테스트와 고객 데이터 기반 개선 과정에서 전환율은 2.7%에서 3.9%, ROAS는 190%에서 240%로 높아졌습니다. 이 수치는 협업한 개선 과정의 성과이며 리다이렉트 코드만의 효과로 분리해 측정한 값은 아닙니다.",
+        ],
+      },
+    ],
+    insight: "페이지 동작의 일관성을 지켜 비교 가능한 데이터를 수집했습니다.",
+  },
+  {
+    id: "solvps",
+    navLabel: "solvPS",
+    eyebrow: "solvPS",
+    category: "Web & Data",
+    year: "2026",
+    headline: "함께 푸는 알고리즘,\n이어지는 학습 기록",
+    shortDescription:
+      "풀이 코드 수집부터 AI 학습 분석과 배포까지 연결한 알고리즘 협업 플랫폼.",
+    lede: "백준 풀이 코드를 자동으로 수집하고 solved.ac 학습 이력으로 취약 유형과 맞춤 문제를 안내하는 알고리즘 협업 플랫폼입니다.",
     tone: "grey",
     slotLayout: "single",
-    slots: [
-      {
-        kind: "natural",
-        title: "대시보드, 위험도 순 정렬과 이상 패턴 탐지 결과",
-        hint: "화면 캡처",
-        src: "imgs/aiops-dashboard.png",
-        size: { w: 904, h: 597 },
-        alt: "사전 경보와 이상 패턴 탐지 카드가 위험도 순으로 놓인 운영 대시보드",
-      },
-      {
-        kind: "natural",
-        title: "워크플로우 1, 사전에 없는 로그를 판별하는 경로",
-        hint: "Dify 워크플로우",
-        src: "imgs/aiops-dify-1.png",
-        size: { w: 1760, h: 424 },
-        alt: "과거 사례 검색, 미등록 로그 추정, 정형화, 반환으로 이어지는 판별 워크플로우",
-      },
-      {
-        kind: "natural",
-        title: "워크플로우 2, 시간 윈도우를 묶어 이상 패턴을 찾는 경로",
-        hint: "Dify 워크플로우",
-        src: "imgs/aiops-dify-2.png",
-        size: { w: 1762, h: 394 },
-        alt: "윈도우 집계를 받아 패턴을 분석하고 출력을 검증해 findings로 반환하는 탐지 워크플로우",
-      },
-    ],
+    tags: ["Next.js", "Claude API", "AWS"],
+    github: "https://github.com/SOLv4/solvPS",
+    highlight: "Chrome 확장 프로그램 / AI 학습 분석",
+    slots: [],
     meta: [
+      { label: "기간", value: "2026.02.27 — 2026.03.06" },
       {
-        label: "역할",
-        value:
-          "기획부터 설계, 개발, 최종 발표까지 단독 수행. 워크플로우 2종, 대시보드 6종 구현",
+        label: "환경",
+        value: "신한투자증권 프로디지털아카데미 7기 / 팀 프로젝트",
       },
       {
-        label: "스택",
-        value:
-          "Java 17, Spring Boot, Thymeleaf(SSR), Spring Data JPA, H2, Dify, 로컬 LLM",
+        label: "담당",
+        value: "프론트엔드, AI 분석, Chrome 확장 프로그램, 인증 및 배포",
       },
       {
-        label: "기간",
+        label: "기술",
         value:
-          "2026년 7월 27일 ~ 9월 4일, 신한투자증권 ICT기획운영부 인턴 프로젝트",
+          "Next.js, TypeScript, PostgreSQL, Drizzle ORM, Claude API, Better Auth, AWS, GitHub Actions",
       },
     ],
     blocks: [
       {
-        heading: "정의한 문제",
+        heading: "문제",
         paragraphs: [
-          "운영 알림이 등급 구분 없이 전달돼서, 확인이 필요한 소수의 로그가 나머지에 묻혔습니다. 알림이 많아질수록 담당자는 확인하지 않게 됩니다.",
-          "알림을 선별하려면 판별이 먼저 되어야 하는데, 무슨 에러인지 사람이 매번 다시 확인하고 있었습니다.",
-          "개별 로그는 각각 정상 범위인데 여러 건이 모여 장애로 이어지는 패턴도 있었습니다. 한 건 단위로만 보는 구조라 시간 축으로 묶는 주체가 없었고, 징후 단계에서 확인할 방법이 없었습니다.",
+          "알고리즘 스터디에서 풀이 코드를 수동으로 공유하고 각자의 취약 유형을 파악하는 번거로움을 줄이고자 했습니다.",
         ],
       },
       {
-        heading: "설계",
+        heading: "학습 흐름",
         paragraphs: [
-          "시스템 전체를 룰만으로 완결되게 만들고 LLM을 그 위에 얹었습니다. 로그 수신, 사전 조회, 위험도 계산, 저장, 화면 출력까지 주 경로는 동기로 처리하고 LLM 응답을 기다리지 않습니다. LLM이 멈춰도 판별과 저장, 화면은 그대로 동작합니다.",
-          "LLM은 두 곳에만 넣었습니다. 사전에 없는 로그를 판별하는 경로와, 일정 시간 윈도우로 집계해 이상 패턴을 찾는 경로입니다. 로그 본문이 외부로 나가면 안 되는 환경이라 내부에 설치한 로컬 모델을 씁니다.",
-          "LLM 출력은 그대로 쓰지 않습니다. 사고 과정 잔재를 제거한 뒤 JSON을 추출하고, 유형은 화이트리스트 밖이면 폐기하고, 예측 시각은 형식과 미래 시각 검증을 통과할 때만 인정합니다.",
-          "중복 억제 키는 앱에서 계산합니다. LLM에 맡기면 같은 패턴에서도 목록 순서에 따라 키가 매번 달라졌습니다.",
-        ],
-        bullets: [
-          "LLM이 만든 판별은 자동으로 사전에 등록되지 않습니다. 초안을 검토 큐에 올리고 운영자가 승인해야 사전에 들어갑니다. 잘못된 판별이 한 번 등록되면 이후 조회가 계속 그 값을 반환하기 때문입니다.",
-          "지식 노드도 4종으로 나눴습니다. 사람이 확정한 사전, 매뉴얼 원문, 룰이 관측한 사례, LLM 초안을 같은 층에 두면 미승인 초안이 근거로 올라가고, LLM이 자기 출력을 다시 근거로 참조하게 됩니다.",
+          "대시보드, 팀 관리, 학습 로드맵과 문제 비교 화면을 구현했습니다. Claude Tool Use에 사용자 정보 조회, 태그 통계 분석과 문제 검색 도구를 연결하고, 도구 호출 상태와 중간 결과를 SSE로 전달했습니다.",
         ],
       },
       {
-        heading: "트러블슈팅",
+        heading: "수집과 인증",
         paragraphs: [
-          {
-            lead: "판별 지연",
-            text: "사전에 없는 로그 한 건을 판별하는 데 수 분이 걸렸습니다. CPU 전용 환경이라 생성 속도가 낮은 데다, 답변 전 사고 과정에서 토큰을 먼저 소진하는 것이 원인이었습니다. 사고 과정을 끄고 출력 상한을 둬서 약 5분의 1로 줄였습니다. 하드웨어는 바꿀 수 없어 절대 속도는 그대로 남았고, 타임아웃과 비동기 분리를 따로 넣었습니다. 성능 개선이 아니라 안정성 조치입니다.",
-          },
-          {
-            lead: "탐지 주체 전환",
-            text: "이상 패턴이 여러 건 탐지됐는데 LLM이 반영된 건은 0건이었습니다. 룰이 후보를 일정 수 이상 찾을 때만 LLM을 호출하도록 되어 있어서, 룰이 만들지 못한 후보는 LLM이 볼 기회가 없었습니다. 게이트를 뒤집어 활동량이 있으면 LLM을 먼저 호출하고, 정의한 유형 밖의 패턴도 보고할 수 있게 했습니다. 룰은 힌트와 안전망 역할로 옮겼습니다.",
-          },
-          {
-            lead: "다운타임 중 로그 유실",
-            text: "테스트 중 LLM이 멈춘 구간에서 로그가 유실됐습니다. 수신부터 판별, 저장까지 한 호출 안에서 동기로 처리해서, 응답이 없으면 로그가 메모리에서 폐기됐습니다. 순서를 바꿔 로그를 받으면 판별보다 먼저 디스크에 쓰고, LLM은 비동기 큐로 나중에 합류시켰습니다.",
-          },
+          "Chrome 확장 프로그램에서 제출 이벤트를 감지한 뒤 채점 상태를 확인해 코드를 수집했습니다. JWT와 HMAC 기반 토큰의 이중 검증을 적용했습니다.",
         ],
       },
       {
-        heading: "결과",
+        heading: "배포",
         paragraphs: [
-          "룰 경로와 LLM 경로가 분리되면서, LLM을 내려도 판별과 위험도 계산, 저장, 화면이 그대로 동작합니다. LLM을 강제로 중단시킨 상태에서 로그를 흘려보내 유실이 생기지 않는 것까지 확인했습니다. 워크플로우 2종과 대시보드 6종을 만들어 최종 발표까지 마쳤습니다.",
-          "발표에서 한계도 함께 적었습니다. RAG가 키워드 검색이라 코드 체계가 다르면 같은 뜻의 매뉴얼을 찾지 못합니다. 시계열 예측은 외부 라이브러리 없이 구현했지만 백테스트가 빗나갔고, 탐지 정확도는 정답 라벨이 없어 측정하지 못했습니다.",
-          "중간에 시뮬레이터가 만든 로그를 집계해 사전을 채운 적이 있습니다. 넣은 값을 되읽는 구조여서, 실제 로그 추출본에서 다시 산출해 전부 고쳤습니다. 이후로는 모든 수치에 출처를 함께 적었습니다.",
+          "GitHub Actions, S3, CodeDeploy와 EC2로 자동 배포 파이프라인을 구축했습니다. 배포 중 환경변수가 유실되는 문제를 백업 및 복원 훅으로 해결하고 실행 사용자 권한과 PM2 재기동 시 인증값 주입 절차를 정리했습니다.",
         ],
       },
     ],
-    code: {
-      afterBlock: 1,
-      sample: {
-        caption: "룰로 완결되는 주 경로와 비동기 LLM 합류",
-        code: `// 주 경로는 룰만으로 끝납니다. LLM 응답을 기다리지 않습니다
-@Transactional
-public LogView ingest(RawLog raw) {
-    LogEntry saved = repository.save(LogEntry.from(raw));  // 판별보다 먼저 저장합니다
-    Classification hit = dictionary.lookup(raw.code());
-
-    if (hit != null) {
-        return LogView.of(saved, riskScorer.score(hit));   // 사전에 있으면 여기서 끝
-    }
-    llmQueue.submit(saved.getId());                        // 미등록 건만 비동기로 넘깁니다
-    return LogView.of(saved, riskScorer.unknown());
-}`,
+    insight: "코드 수집과 공유, 분석 결과를 하나의 학습 흐름에 연결했습니다.",
+  },
+  {
+    id: "paytrace",
+    navLabel: "PayTrace",
+    eyebrow: "PayTrace",
+    category: "Finance",
+    year: "MVP",
+    headline: "생활의 지출을\n설명 가능한 기록으로",
+    shortDescription:
+      "생활 지출 기반 신용 보조지표 서비스의 화면과 PDF 리포트 MVP.",
+    lede: "월세와 관리비, 구독료 같은 생활 지출을 신용 보조지표 PayScore로 정리하는 서비스의 MVP를 개발했습니다.",
+    tone: "light",
+    slotLayout: "single",
+    tags: ["JavaScript", "Express", "GA4"],
+    github: "https://github.com/kjung0109/paytrace-mvp",
+    highlight: "UI / PDF 리포트 MVP",
+    slots: [],
+    meta: [
+      { label: "환경", value: "신한투자증권 프로디지털아카데미 교육 프로젝트" },
+      {
+        label: "담당",
+        value: "사용자 흐름 UI, PDF 리포트, 행동 이벤트 및 이메일 서버 연동",
       },
-    },
-    insight:
-      "LLM을 쓰는 기능에서는 어디까지 맡길지 정하는 판단이 가장 중요했습니다. 화면에 들어오는 실시간 데이터가 어디서 만들어지고 어디서 유실되는지 직접 확인하면서, 실시간 UI에서 무엇을 방어해야 하는지 기준이 생겼습니다.",
+      {
+        label: "기술",
+        value: "HTML, CSS, JavaScript, Node.js, Express, Nodemailer, GA4",
+      },
+    ],
+    blocks: [
+      {
+        heading: "구현",
+        paragraphs: [
+          "연결, 동의, 검증, 리포트의 4단계 화면과 PDF 출력 페이지를 구현했습니다. GA4 사용자 행동 이벤트를 설계하고 Express와 Nodemailer를 연동했습니다.",
+        ],
+      },
+      {
+        heading: "출력과 인증",
+        paragraphs: [
+          "PDF 출력 화면은 별도 문서로 분리해 서비스 화면과 인쇄 양식의 충돌을 해결했습니다. 이메일 인증 정보는 서버에서 관리했습니다.",
+        ],
+      },
+      {
+        heading: "범위",
+        paragraphs: [
+          "프론트엔드 UI와 PDF 리포트 생성 MVP를 구현했습니다. 스크래핑, OCR, 마이데이터 연동은 설계안 단계입니다.",
+        ],
+      },
+    ],
+    insight: "서비스 화면과 출력 문서의 역할을 나누었습니다.",
   },
 ];

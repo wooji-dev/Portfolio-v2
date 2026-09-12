@@ -43,6 +43,6 @@ export const history: readonly MetaRow[] = [
   {
     label: "자격",
     value:
-      "AWS Certified Solutions Architect – Associate, 웹디자인기능사, OPIc IH",
+      "정보처리기사, AWS Certified Solutions Architect – Associate, 웹디자인기능사, OPIc IH",
   },
 ];

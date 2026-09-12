@@ -50,7 +50,9 @@ export interface MetaRow {
  * 문자열이면 그대로 쓰고, lead가 있으면 앞에 굵은 소제목이 붙는다.
  * 트러블슈팅처럼 사례가 나열되는 곳에서 무슨 이야기인지 먼저 보이게 하는 용도다.
  */
-export type Paragraph = string | { readonly lead: string; readonly text: string };
+export type Paragraph =
+  | string
+  | { readonly lead: string; readonly text: string };
 
 /** 프로젝트 본문 한 덩어리. 소제목 + 문단 + 선택적 불릿. */
 export interface ProseBlock {
@@ -68,6 +70,12 @@ export interface CodeSample {
 export type SectionTone = "light" | "grey";
 
 export interface Project {
+  readonly category?: "Finance" | "AI & Automation" | "Web & Data";
+  readonly tags?: readonly string[];
+  readonly github?: string;
+  readonly shortDescription?: string;
+  readonly year?: string;
+  readonly highlight?: string;
   readonly id: string;
   readonly navLabel: string;
   readonly eyebrow: string;
