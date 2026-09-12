@@ -7,7 +7,7 @@ export const summaryCards: readonly SummaryCard[] = [
     problem:
       "화면마다 금액 계산이 달라질 수 있었고, 요청이 실패하면 자동 재시도가 이중 출금으로 이어질 수 있었습니다.",
     change: "금액 계산과 재시도 정책을 currency.ts와 주문 훅 한 곳으로 모았습니다.",
-    result: "시나리오 검사에서 금액 오차와 중복 주문이 나오지 않았습니다.",
+    result: "금액 계산과 주문 요청 정책을 통일하고 전 화면과 거래 인증을 구현했습니다.",
   },
   {
     id: "solmate",

@@ -1,58 +1,48 @@
-# 포트폴리오
+# 우정인 — Interactive Portfolio
 
-프론트엔드 포트폴리오 사이트. React + TypeScript + Vite.
+React 18 + TypeScript + Vite 기반 GitHub Pages 포트폴리오입니다. 최신 경험 기록에 맞춘 7개 프로젝트, 분야별 필터, 프로젝트 상세 창, 실제 시연 영상, 기술 및 경력 타임라인을 제공합니다.
 
 ## 실행
 
+Node.js 20 이상을 권장합니다. 의존성 버전과 package-lock.json은 기존 프로젝트를 유지했습니다.
+
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-## 명령
-
-| 명령 | 설명 |
-| --- | --- |
-| `npm run dev` | 개발 서버 |
-| `npm run build` | 타입 검사 후 프로덕션 빌드 |
-| `npm run preview` | 빌드 결과 미리보기 |
-| `npm run typecheck` | 타입 검사만 실행 |
-
-## 구조
-
-```
-src/
-├─ data/          내용. 프로젝트, 스택, 이력을 타입이 붙은 데이터로 관리한다
-├─ components/    화면 조각
-├─ hooks/         useReveal — 스크롤 등장 처리
-├─ styles/        tokens.css(디자인 토큰), app.css(레이아웃과 컴포넌트)
-├─ types.ts       데이터 스키마
-└─ App.tsx
+```bash
+npm run typecheck
+npm run build
+npm run preview
 ```
 
-내용을 고칠 때는 `src/data` 안의 파일만 수정하면 된다. 컴포넌트는 건드릴 필요가 없다.
+`npm run dev -- --host 127.0.0.1 --port 5173 --strictPort`처럼 주소와 포트를 지정할 수 있습니다. `scripts/vite.mjs`에서 Vite API를 호출하고 `vite.config.mjs`를 ESM으로 직접 불러옵니다. 설정 파일을 다시 esbuild로 번들링하는 과정을 생략해 로컬 설정 로딩 정지를 피합니다.
 
-## 이미지 채우기
+## 변경할 곳
 
-`src/data/projects.ts`의 각 프로젝트 `slots` 배열이 이미지 자리다.
-`src` 값을 넣으면 그 자리에 이미지가 들어가고, 비워두면 안내 문구가 있는 placeholder가 보인다.
+- `src/data/projects.ts`: 프로젝트 본문, 역할, 기술, 이미지와 GitHub 링크.
+- `src/data/profile.ts`: 이름, 소개, 연락처.
+- `src/App.tsx`: 사이트 구성, 경력, 기술 묶음, 필터와 상세 창.
+- `src/styles/tokens.css`: 색상과 글꼴.
+- `src/styles/app.css`: 반응형 레이아웃과 모션.
+- `public/imgs/signal-loop.jpg`: 첫 화면의 AI 생성 이미지.
 
-```ts
-{ kind: "phone", title: "홈 · 잔돈 적립", hint: "1170×2532", src: "/shots/pocketstock-home.png" }
-```
-
-이미지는 `public/shots/`에 넣는다.
+프로젝트 상세는 `#pocketstock`, `#aiops`, `#solmate`, `#mcp`, `#elo`, `#solvps`, `#paytrace` 주소로 바로 열립니다. 이전 `#summary`, `#stack`, `#history` 링크도 관련 섹션으로 연결합니다.
 
 ## 배포
 
-GitHub Pages 프로젝트 페이지로 배포한다면 `vite.config.ts`의 `base`를 저장소 이름으로 바꾼다.
+기존 `.github/workflows/deploy.yml`을 유지했습니다. `main`에 반영되면 빌드 후 GitHub Pages로 배포됩니다. GitHub 저장소의 Settings → Pages에서 Source를 GitHub Actions로 설정합니다.
 
-```ts
-base: "/portfolio/"
-```
+`base: "./"`를 유지해 `/Portfolio-v2/` 프로젝트 경로에서도 자산을 상대 주소로 불러옵니다. `dist/`는 로컬 빌드 산출물이며 Git에는 넣지 않습니다.
 
 ## 접근성과 모션
 
-- 등장 효과는 첫 화면 밖 요소에만 적용된다. 스크립트가 없거나 인쇄할 때도 내용은 모두 보인다.
-- `prefers-reduced-motion: reduce` 환경에서는 모션을 적용하지 않는다.
-# Portfolio-v2
+- 시맨틱 링크와 버튼, 네이티브 dialog, Esc 닫기, 키보드 포커스 표시.
+- `prefers-reduced-motion` 지원 및 첫 화면의 Motion on/off 버튼.
+- 영상은 사용자 조작으로 재생하고 컨트롤을 제공합니다.
+- 모바일 메뉴, 단일 열 프로젝트 목록, 터치 가능한 필터와 가로 스크롤 영상 갤러리.
+- 이미지 로딩 공간을 미리 확보하고 첫 화면 이미지만 우선 로딩합니다.
+- 외부 웹폰트를 못 불러와도 시스템 글꼴로 표시합니다.
+
+[콘텐츠 근거](docs/content-sources.md) · [이미지 생성 프롬프트 및 교체 방법](docs/visual-assets.md) · [검증 기록](docs/validation.md)
