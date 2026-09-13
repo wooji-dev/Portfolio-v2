@@ -26,7 +26,7 @@ npm run preview
 - `src/App.tsx`: 사이트 구성, 경력, 기술 묶음, 필터와 상세 창.
 - `src/styles/tokens.css`: 색상과 글꼴.
 - `src/styles/app.css`: 반응형 레이아웃과 모션.
-- `public/imgs/signal-loop.jpg`: 첫 화면의 AI 생성 이미지.
+- `public/imgs/quiet-loop.jpg`: 첫 화면의 AI 생성 이미지.
 
 프로젝트 상세는 `#pocketstock`, `#aiops`, `#solmate`, `#mcp`, `#elo`, `#solvps`, `#paytrace` 주소로 바로 열립니다. 이전 `#summary`, `#stack`, `#history` 링크도 관련 섹션으로 연결합니다.
 
