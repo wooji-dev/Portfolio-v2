@@ -1,5 +1,27 @@
 # 검증 기록
 
+## 2026-09-13 힉스필드 오브제 및 전체 리디자인
+
+- `npm run build`: TypeScript 검사와 Vite 프로덕션 빌드 성공.
+- `git diff --check`: 통과.
+- JavaScript 169.92 KB (gzip 58.54 KB), CSS 22.67 KB (gzip 5.71 KB).
+- 힉스필드 생성 오브제: 1024 × 1024로 정상 로딩. 웹용 JPEG 약 109 KiB.
+- 1280px 데스크톱에서 표지, 프로젝트 카드, 소개, 경력 시각 확인.
+- 390px에서 표지, 소개, 프로젝트 상세 및 모바일 메뉴 시각 확인.
+- 320px에서 표지와 연락처, 700px에서 표지 시각 확인.
+- 320px, 390px, 700px, 1280px, 1440px에서 페이지 가로 넘침 없음.
+- Finance 필터: Pocket Stock, SOLMate 및 PayTrace 표시.
+- AI & Automation 필터: AIOps와 Figma MCP 표시.
+- Web & Data 필터: ELO와 solvPS 표시. All work로 복원 확인.
+- Pocket Stock 상세 창 열림, 제목과 설명 표시, Esc 닫기 및 `#work` 복귀 확인.
+- 영상 3개에 포스터와 재생 컨트롤 포함, 자동재생 없음. 전체 재생 시간은 재검증하지 않음.
+- 모바일 메뉴에서 About과 Contact 이동 및 메뉴 닫힘 확인.
+- Motion off에서 이미지 애니메이션이 `none`으로 변경됨.
+- 육군 장교 복무 이력 표시 확인.
+- 브라우저 오류 및 경고 없음. 실제 iOS/Safari 기기 검증이나 자동 접근성 감사는 수행하지 않음.
+
+## 이전 리디자인 검증
+
 2026-09-12~13, 로컬 프로덕션 빌드를 인앱 브라우저에서 확인했습니다.
 
 - `npm ci`: 기존 package-lock.json으로 설치 완료.
