@@ -24,6 +24,7 @@ npm run preview
 - `src/data/projects.ts`: 프로젝트 본문, 역할, 기술, 이미지와 GitHub 링크.
 - `src/data/profile.ts`: 이름, 소개, 연락처.
 - `src/App.tsx`: 사이트 구성, 경력, 기술 묶음, 필터와 상세 창.
+- `src/hooks/useHeroInteraction.ts`: 커서 반응, 스크롤 깊이감, 오브제 클릭 회전.
 - `src/styles/tokens.css`: 색상과 글꼴.
 - `src/styles/app.css`: 반응형 레이아웃과 모션.
 - `public/imgs/blue-asterisk.jpg`: 힉스필드에서 생성한 첫 화면의 작은 오브제.
@@ -39,7 +40,9 @@ npm run preview
 ## 접근성과 모션
 
 - 시맨틱 링크와 버튼, 네이티브 dialog, Esc 닫기, 키보드 포커스 표시.
-- `prefers-reduced-motion` 지원 및 첫 화면의 Motion on/off 버튼.
+- 커서에 반응하는 오브제 기울기, 클릭·터치·키보드 회전, 스크롤에 따라 움직이는 제목과 오브제.
+- `prefers-reduced-motion` 지원 및 첫 화면의 Motion on/off 버튼. 모션을 끄면 인터랙션 위치를 초기화하고 오브제 회전을 비활성화합니다.
+- 포인터와 스크롤 입력은 `requestAnimationFrame`으로 한 프레임에 한 번 처리합니다. 입력이 없으면 반복 루프를 실행하지 않습니다.
 - 영상은 사용자 조작으로 재생하고 컨트롤을 제공합니다.
 - 모바일 메뉴, 단일 열 프로젝트 목록, 터치 가능한 필터와 가로 스크롤 영상 갤러리.
 - 이미지 로딩 공간을 미리 확보하고 첫 화면 이미지만 우선 로딩합니다.

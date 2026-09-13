@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projects } from "./data/projects";
 import { profile } from "./data/profile";
+import { useHeroInteraction } from "./hooks/useHeroInteraction";
 import type { Project } from "./types";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
@@ -105,19 +106,100 @@ function ProjectVisual({ project }: { project: Project }) {
         />
       </div>
     );
-  const titles: Record<string, { title: string; subtitle: string }> = {
-    mcp: { title: "Figma / Code", subtitle: "7 TOOLS. ONE WORKFLOW." },
-    elo: { title: "A / B", subtitle: "TEST. LEARN. IMPROVE." },
-    solvps: { title: "solvPS", subtitle: "A BETTER WAY TO LEARN." },
-  };
-  const visual = titles[project.id];
+  if (project.id === "mcp")
+    return (
+      <div
+        className="project-visual legacy-visual mcp-visual"
+        aria-hidden="true"
+      >
+        <div className="mcp-path">
+          <span className="figma-mark">
+            <i />
+            <i />
+            <i />
+            <i />
+            <i />
+          </span>
+          <span className="path-line" />
+          <span className="code-mark">&lt;/&gt;</span>
+        </div>
+        <div className="mcp-legend">
+          <span>DESIGN</span>
+          <span>7 TOOLS</span>
+          <span>CODE</span>
+        </div>
+        <span className="visual-caption">
+          FIGMA REST API × MODEL CONTEXT PROTOCOL
+        </span>
+      </div>
+    );
+  if (project.id === "elo")
+    return (
+      <div
+        className="project-visual legacy-visual elo-visual"
+        aria-hidden="true"
+      >
+        <span className="visual-caption top-caption">ELO / A/B TESTING</span>
+        <div className="test-columns">
+          <div>
+            <span>CONTROL</span>
+            <b>A</b>
+            <div className="test-bar" />
+            <strong>2.7%</strong>
+          </div>
+          <div>
+            <span>VARIANT</span>
+            <b>B</b>
+            <div className="test-bar" />
+            <strong>3.9%</strong>
+          </div>
+        </div>
+        <span className="visual-caption">
+          고객 데이터 기반 개선 과정의 전환율
+        </span>
+      </div>
+    );
+  if (project.id === "solvps")
+    return (
+      <div
+        className="project-visual legacy-visual solvps-visual"
+        aria-hidden="true"
+      >
+        <span className="visual-caption top-caption">
+          SOLVE TOGETHER. GROW TOGETHER.
+        </span>
+        <div className="code-window">
+          <div className="window-dots">
+            <i />
+            <i />
+            <i />
+            <span>learning.ts</span>
+          </div>
+          <code>
+            <span className="code-purple">const</span> nextStep ={" "}
+            <span className="code-green">await</span>
+            <br />
+            &nbsp; learning.<span className="code-blue">analyze</span>({"{"}
+            <br />
+            &nbsp;&nbsp; history:{" "}
+            <span className="code-green">yourSolutions</span>,<br />
+            &nbsp;&nbsp; direction:{" "}
+            <span className="code-orange">'forward'</span>
+            <br />
+            &nbsp;{"}"});
+            <br />
+            <span className="code-comment">// keep solving, together.</span>
+          </code>
+        </div>
+        <span className="visual-caption">
+          학습 분석 흐름을 표현한 개념 코드
+        </span>
+      </div>
+    );
   return (
-    <div
-      className={`project-visual type-visual ${project.id}-visual`}
-      aria-hidden="true"
-    >
-      <span>{visual?.title || project.eyebrow}</span>
-      <small>{visual?.subtitle || project.category}</small>
+    <div className="project-visual paytrace-visual" aria-hidden="true">
+      <span>PayTrace</span>
+      <Arrow diagonal />
     </div>
   );
 }
@@ -285,7 +367,7 @@ export default function App() {
   );
   const [copied, setCopied] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
-  const heroArt = useRef<HTMLDivElement>(null);
+  const { heroRef, spinRef, spinArt } = useHeroInteraction(motion);
   const copyTimeout = useRef<ReturnType<typeof setTimeout>>();
   const activeProject = projects.find((project) => project.id === activeId);
   const visibleProjects = projects.filter(
@@ -306,7 +388,6 @@ export default function App() {
   }, []);
   useEffect(() => {
     document.documentElement.dataset.motion = motion ? "on" : "off";
-    if (!motion) heroArt.current?.removeAttribute("style");
   }, [motion]);
   useEffect(() => {
     const readHash = () => {
@@ -374,18 +455,6 @@ export default function App() {
     setActiveId(undefined);
     if (projects.some((project) => `#${project.id}` === window.location.hash))
       window.history.replaceState(null, "", "#work");
-  }
-  function moveArt(event: MouseEvent<HTMLElement>) {
-    if (!motion || !window.matchMedia("(pointer: fine)").matches) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    heroArt.current?.style.setProperty(
-      "--pointer-x",
-      `${((event.clientX - rect.left) / rect.width - 0.5) * 10}px`,
-    );
-    heroArt.current?.style.setProperty(
-      "--pointer-y",
-      `${((event.clientY - rect.top) / rect.height - 0.5) * 8}px`,
-    );
   }
   async function copyEmail() {
     try {
@@ -460,12 +529,7 @@ export default function App() {
         </nav>
       )}
       <main>
-        <section
-          className="hero"
-          id="top"
-          onMouseMove={moveArt}
-          onMouseLeave={() => heroArt.current?.removeAttribute("style")}
-        >
+        <section className="hero" id="top" ref={heroRef}>
           <div className="hero-topline">
             <span>
               JUNGIN WOO <span className="muted">/</span> FULL-STACK DEVELOPER
@@ -474,22 +538,38 @@ export default function App() {
           </div>
           <div className="hero-main">
             <h1>
-              <span>Built with care.</span>
-              <span>
-                Made to <em>work.</em>
+              <span className="hero-line">
+                <span>Built with care.</span>
+              </span>
+              <span className="hero-line">
+                <span>
+                  Made to <em>work.</em>
+                </span>
               </span>
             </h1>
-            <div className="hero-art-wrap" aria-hidden="true">
-              <div className="hero-art" ref={heroArt}>
-                <img
-                  src={asset("imgs/blue-asterisk.jpg")}
-                  width="1024"
-                  height="1024"
-                  fetchPriority="high"
-                  alt=""
-                />
-              </div>
-            </div>
+            <button
+              type="button"
+              className="hero-art-wrap"
+              onClick={spinArt}
+              disabled={!motion}
+              aria-label="파란 오브제 돌리기"
+            >
+              <span className="hero-art">
+                <span className="hero-art-spin" ref={spinRef}>
+                  <img
+                    src={asset("imgs/blue-asterisk.jpg")}
+                    width="1024"
+                    height="1024"
+                    fetchPriority="high"
+                    alt=""
+                    draggable="false"
+                  />
+                </span>
+              </span>
+              <span className="art-hint" aria-hidden="true">
+                Click / tap to spin
+              </span>
+            </button>
           </div>
           <div className="hero-intro">
             <p>
@@ -570,12 +650,20 @@ export default function App() {
                   onClick={() => openProject(project)}
                   aria-label={`${project.eyebrow} 프로젝트 상세 보기`}
                 >
-                  <div className="project-image-wrap">
+                  <div
+                    className={`project-image-wrap ${["mcp", "elo", "solvps"].includes(project.id) ? "legacy-cover" : ""}`}
+                  >
                     <ProjectVisual project={project} />
                     <span className="card-view">
                       <Arrow diagonal />
                     </span>
-                    <span className="card-category">{project.category}</span>
+                    {["mcp", "elo", "solvps"].includes(project.id) ? (
+                      <span className="card-number">
+                        {String(projects.indexOf(project) + 1).padStart(2, "0")}
+                      </span>
+                    ) : (
+                      <span className="card-category">{project.category}</span>
+                    )}
                   </div>
                   <div className="project-title-row">
                     <h3>
