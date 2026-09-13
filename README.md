@@ -1,6 +1,6 @@
 # 우정인 — Interactive Portfolio
 
-React 18 + TypeScript + Vite 기반 GitHub Pages 포트폴리오입니다. 최신 경험 기록에 맞춘 7개 프로젝트, 분야별 필터, 프로젝트 상세 창, 실제 시연 영상, 기술 및 경력 타임라인을 제공합니다.
+React 18 + TypeScript + Vite 기반 GitHub Pages 포트폴리오입니다. 아이보리 바탕, 큰 타이포그래피, 힉스필드에서 생성한 파란 오브제 하나로 구성했습니다. 7개 프로젝트, 분야별 필터, 프로젝트 상세 창, 실제 시연 영상, 기술 및 경력 타임라인을 제공합니다.
 
 ## 실행
 
@@ -26,7 +26,7 @@ npm run preview
 - `src/App.tsx`: 사이트 구성, 경력, 기술 묶음, 필터와 상세 창.
 - `src/styles/tokens.css`: 색상과 글꼴.
 - `src/styles/app.css`: 반응형 레이아웃과 모션.
-- `public/imgs/quiet-loop.jpg`: 첫 화면의 AI 생성 이미지.
+- `public/imgs/blue-asterisk.jpg`: 힉스필드에서 생성한 첫 화면의 작은 오브제.
 
 프로젝트 상세는 `#pocketstock`, `#aiops`, `#solmate`, `#mcp`, `#elo`, `#solvps`, `#paytrace` 주소로 바로 열립니다. 이전 `#summary`, `#stack`, `#history` 링크도 관련 섹션으로 연결합니다.
 

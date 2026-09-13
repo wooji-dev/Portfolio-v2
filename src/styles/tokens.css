@@ -1,13 +1,15 @@
 :root {
-  --ink: #191c17;
-  --paper: #f4f5f0;
+  --ink: #232321;
+  --paper: #f6f5f1;
   --white: #fff;
-  --dark: #10110f;
-  --lime: #d4fa5b;
-  --muted: #697062;
-  --line: #d4d9cd;
+  --dark: #232321;
+  --accent: #2455d6;
+  --accent-soft: #e6ebf8;
+  --muted: #74736f;
+  --line: #d8d7d1;
   --font-sans: "Noto Sans KR", sans-serif;
-  --font-display: "Space Grotesk", "Noto Sans KR", sans-serif;
+  --font-display: "DM Sans", "Noto Sans KR", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
   --font-mono: "IBM Plex Mono", monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }

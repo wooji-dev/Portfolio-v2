@@ -68,11 +68,6 @@ function ProjectVisual({ project }: { project: Project }) {
   if (project.id === "pocketstock")
     return (
       <div className="project-visual pocket-visual" aria-hidden="true">
-        <span className="visual-word">
-          Small change.
-          <br />
-          Big possibilities.
-        </span>
         <div className="phone-pair">
           <img
             src={asset("shots/pocketstock-1.jpg")}
@@ -89,125 +84,40 @@ function ProjectVisual({ project }: { project: Project }) {
             loading="lazy"
           />
         </div>
-        <span className="visual-caption">POCKET STOCK / MOBILE WEB APP</span>
       </div>
     );
-  if (project.id === "aiops")
+  if (project.id === "aiops" || project.id === "solmate")
     return (
-      <div className="project-visual aiops-visual" aria-hidden="true">
-        <div className="terminal-line">
-          <span className="status-dot" /> SYSTEM OBSERVABILITY <span>v1.0</span>
-        </div>
+      <div
+        className={`project-visual screen-visual ${project.id}-visual`}
+        aria-hidden="true"
+      >
         <img
-          src={asset("imgs/aiops-dashboard.png")}
+          src={asset(
+            project.id === "aiops"
+              ? "imgs/aiops-dashboard.png"
+              : "imgs/solmate-desktop.png",
+          )}
           alt=""
-          width="904"
-          height="597"
-          loading="lazy"
-        />
-        <span className="visual-caption">LOG → RULE → INSIGHT</span>
-      </div>
-    );
-  if (project.id === "solmate")
-    return (
-      <div className="project-visual solmate-visual" aria-hidden="true">
-        <span className="visual-caption top-caption">
-          TRADE. REFLECT. LEARN.
-        </span>
-        <img
-          src={asset("imgs/solmate-desktop.png")}
-          alt=""
-          width="2880"
-          height="1800"
+          width={project.id === "aiops" ? 904 : 2880}
+          height={project.id === "aiops" ? 597 : 1800}
           loading="lazy"
         />
       </div>
     );
-  if (project.id === "mcp")
-    return (
-      <div className="project-visual mcp-visual" aria-hidden="true">
-        <div className="mcp-path">
-          <span className="figma-mark">
-            <i />
-            <i />
-            <i />
-            <i />
-            <i />
-          </span>
-          <span className="path-line" />
-          <span className="code-mark">&lt;/&gt;</span>
-        </div>
-        <div className="mcp-legend">
-          <span>DESIGN</span>
-          <span>7 TOOLS</span>
-          <span>CODE</span>
-        </div>
-        <span className="visual-caption">
-          FIGMA REST API × MODEL CONTEXT PROTOCOL
-        </span>
-      </div>
-    );
-  if (project.id === "elo")
-    return (
-      <div className="project-visual elo-visual" aria-hidden="true">
-        <span className="visual-caption top-caption">ELO / A/B TESTING</span>
-        <div className="test-columns">
-          <div>
-            <span>CONTROL</span>
-            <b>A</b>
-            <div className="test-bar" />
-            <strong>2.7%</strong>
-          </div>
-          <div>
-            <span>VARIANT</span>
-            <b>B</b>
-            <div className="test-bar" />
-            <strong>3.9%</strong>
-          </div>
-        </div>
-        <span className="visual-caption">
-          고객 데이터 기반 개선 과정의 전환율
-        </span>
-      </div>
-    );
-  if (project.id === "solvps")
-    return (
-      <div className="project-visual solvps-visual" aria-hidden="true">
-        <span className="visual-caption top-caption">
-          SOLVE TOGETHER. GROW TOGETHER.
-        </span>
-        <div className="code-window">
-          <div className="window-dots">
-            <i />
-            <i />
-            <i />
-            <span>learning.ts</span>
-          </div>
-          <code>
-            <span className="code-purple">const</span> nextStep ={" "}
-            <span className="code-green">await</span>
-            <br />
-            &nbsp; learning.<span className="code-blue">analyze</span>({"{"}
-            <br />
-            &nbsp;&nbsp; history:{" "}
-            <span className="code-green">yourSolutions</span>,<br />
-            &nbsp;&nbsp; direction:{" "}
-            <span className="code-orange">'forward'</span>
-            <br />
-            &nbsp;{"}"});
-            <br />
-            <span className="code-comment">// keep solving, together.</span>
-          </code>
-        </div>
-        <span className="visual-caption">
-          학습 분석 흐름을 표현한 개념 코드
-        </span>
-      </div>
-    );
+  const titles: Record<string, { title: string; subtitle: string }> = {
+    mcp: { title: "Figma / Code", subtitle: "7 TOOLS. ONE WORKFLOW." },
+    elo: { title: "A / B", subtitle: "TEST. LEARN. IMPROVE." },
+    solvps: { title: "solvPS", subtitle: "A BETTER WAY TO LEARN." },
+  };
+  const visual = titles[project.id];
   return (
-    <div className="project-visual paytrace-visual" aria-hidden="true">
-      <span>PayTrace</span>
-      <Arrow diagonal />
+    <div
+      className={`project-visual type-visual ${project.id}-visual`}
+      aria-hidden="true"
+    >
+      <span>{visual?.title || project.eyebrow}</span>
+      <small>{visual?.subtitle || project.category}</small>
     </div>
   );
 }
@@ -500,8 +410,7 @@ export default function App() {
       </a>
       <header className="site-header">
         <a href="#top" className="wordmark" aria-label="우정인 포트폴리오 홈">
-          woo<span>ji</span>
-          <i aria-hidden="true">✳</i>
+          wooji<span>.</span>
         </a>
         <nav className="desktop-nav" aria-label="메인 메뉴">
           {navLinks.map(([id, label]) => (
@@ -559,60 +468,47 @@ export default function App() {
         >
           <div className="hero-topline">
             <span>
-              <span className="status-dot" /> FULL-STACK DEVELOPER
+              JUNGIN WOO <span className="muted">/</span> FULL-STACK DEVELOPER
             </span>
-            <span>
-              SEOUL, KR <span className="muted">/</span> PORTFOLIO 2026
-            </span>
+            <span>SEOUL, KR · 2026</span>
           </div>
           <div className="hero-main">
-            <div className="hero-copy">
-              <h1>
-                Thoughtful UI.
-                <br />
-                Reliable
-                <br />
-                <span>systems.</span>
-              </h1>
-              <p className="hero-description">
-                사용하기 쉬운 화면과
-                <br />
-                안정적으로 동작하는 서비스를 만듭니다.
-              </p>
-              <div className="hero-actions">
-                <a href="#work" className="pill-button lime-button">
-                  프로젝트 살펴보기 <Arrow />
-                </a>
-                <a href="#about" className="text-link">
-                  우정인 소개 <span>↓</span>
-                </a>
-              </div>
-            </div>
-            <div className="hero-art-wrap">
+            <h1>
+              <span>Built with care.</span>
+              <span>
+                Made to <em>work.</em>
+              </span>
+            </h1>
+            <div className="hero-art-wrap" aria-hidden="true">
               <div className="hero-art" ref={heroArt}>
                 <img
-                  src={asset("imgs/quiet-loop.jpg")}
-                  width="1536"
+                  src={asset("imgs/blue-asterisk.jpg")}
+                  width="1024"
                   height="1024"
                   fetchPriority="high"
-                  alt="라임색 리본 하나가 부드럽게 이어진 추상적인 루프"
+                  alt=""
                 />
               </div>
             </div>
           </div>
-          <div className="hero-bottom">
-            <div className="hero-signature">
-              <strong>우정인</strong>
-              <span>JUNGIN WOO</span>
-            </div>
+          <div className="hero-intro">
             <p>
-              Frontend to backend.
+              사용하기 쉬운 화면부터 안정적인 서비스까지.
               <br />
-              Curiosity to implementation.
+              프론트엔드와 백엔드를 연결하는 개발자 <strong>우정인</strong>
+              입니다.
             </p>
-            <a href="#work" className="scroll-link">
-              SCROLL TO EXPLORE <span>↓</span>
-            </a>
+            <div className="hero-actions">
+              <a href="#work" className="pill-button primary-button">
+                프로젝트 살펴보기 <Arrow />
+              </a>
+              <a href="#about" className="text-link">
+                소개 보기
+              </a>
+            </div>
+          </div>
+          <div className="hero-bottom">
+            <span>INTERFACES / SYSTEMS / AI & AUTOMATION</span>
             <button
               type="button"
               className="motion-toggle"
@@ -620,35 +516,21 @@ export default function App() {
               aria-pressed={motion}
               aria-label={motion ? "모션 끄기" : "모션 켜기"}
             >
-              <span aria-hidden="true">{motion ? "Ⅱ" : "▷"}</span> Motion{" "}
+              <span className="motion-indicator" aria-hidden="true" /> Motion{" "}
               {motion ? "on" : "off"}
             </button>
           </div>
         </section>
-        <div className="discipline-strip" aria-label="개발 분야">
-          <div>
-            <span>INTERFACES</span>
-            <i>✳</i>
-            <span>FINANCIAL SYSTEMS</span>
-            <i>✳</i>
-            <span>AI & AUTOMATION</span>
-            <i>✳</i>
-            <span>HUMAN EXPERIENCE</span>
-            <i>✳</i>
-          </div>
-        </div>
         <section className="work-section section-pad" id="work">
           <div className="section-heading" data-reveal>
             <div>
               <span className="eyebrow">01 / SELECTED WORK</span>
               <h2>
-                생각을 코드로,
-                <br />
-                <span className="serif-word">코드를 경험으로.</span>
+                Selected <em>work.</em>
               </h2>
             </div>
             <p>
-              문제를 정의하고, 동작하는 서비스로 옮겼습니다.
+              직접 만들고, 연결하고, 개선한 것들.
               <br />
               프로젝트에서 맡은 역할과 구현 과정을 소개합니다.
             </p>
@@ -693,12 +575,15 @@ export default function App() {
                     <span className="card-view">
                       <Arrow diagonal />
                     </span>
-                    <span className="card-number">
-                      {String(projects.indexOf(project) + 1).padStart(2, "0")}
-                    </span>
+                    <span className="card-category">{project.category}</span>
                   </div>
                   <div className="project-title-row">
-                    <h3>{project.eyebrow}</h3>
+                    <h3>
+                      <span className="project-index">
+                        {String(projects.indexOf(project) + 1).padStart(2, "0")}
+                      </span>
+                      {project.eyebrow}
+                    </h3>
                     <span>{project.year}</span>
                   </div>
                   <p className="project-desc">{project.shortDescription}</p>
@@ -728,19 +613,19 @@ export default function App() {
           <div className="about-intro" data-reveal>
             <div>
               <span className="eyebrow">02 / ABOUT ME</span>
-              <div className="about-mark" aria-hidden="true">
-                w<span>j.</span>
-              </div>
+              <h2 className="about-title">
+                A little
+                <br />
+                <em>about me.</em>
+              </h2>
               <span className="about-name">
                 우정인 <span>JUNGIN WOO</span>
               </span>
             </div>
             <div>
-              <h2>
-                화면 너머의
-                <br />
-                <span>흐름까지 살핍니다.</span>
-              </h2>
+              <h3 className="about-statement">
+                화면 너머의 흐름까지 살핍니다.
+              </h3>
               <p>
                 커머스 프론트엔드 개발로 시작해 금융 플랫폼의 거래 처리와 AI
                 자동화로 개발 범위를 넓혀왔습니다. 화면에서 시작한 요청이
@@ -785,9 +670,9 @@ export default function App() {
             <div>
               <span className="eyebrow">03 / THE JOURNEY</span>
               <h2>
-                경험을 쌓고,
+                The path
                 <br />
-                <span className="serif-word">범위를 넓힙니다.</span>
+                <em>so far.</em>
               </h2>
             </div>
             <p>
@@ -796,85 +681,86 @@ export default function App() {
               서비스의 구조를 설계하는 일까지.
             </p>
           </div>
-          <div className="journey-list">
-            {[
-              {
-                date: "2026.07 — 2026.09",
-                company: "신한투자증권",
-                role: "ICT기획운영부 인턴",
-                description:
-                  "금융 IT 운영 환경에서 로그 분석 AI Agent 기획, 설계, 개발 및 최종 발표.",
-                tag: "EXPERIENCE",
-              },
-              {
-                date: "2025.12 — 2026.07",
-                company: "프로디지털아카데미 7기",
-                role: "신한투자증권 / 970시간 수료",
-                description:
-                  "금융 플랫폼과 클라우드, 풀스택 개발 학습. Pocket Stock 최종 프로젝트 최우수상.",
-                tag: "EDUCATION",
-              },
-              {
-                date: "2024.05 — 2025.12",
-                company: "에코마케팅",
-                role: "마케팅테크팀 프론트엔드 개발",
-                description:
-                  "자사몰 개발, 데이터 트래킹, A/B 테스트 플랫폼과 Figma MCP 자동화 도구 개발.",
-                tag: "EXPERIENCE",
-              },
-              {
-                date: "2023.10 — 2024.03",
-                company: "그린컴퓨터아카데미",
-                role: "UI/UX 반응형 웹디자인 및 웹퍼블리셔 / 760시간 수료",
-                description:
-                  "웹 표준과 반응형 UI, JavaScript 및 프론트엔드 프로젝트 학습.",
-                tag: "EDUCATION",
-              },
-              {
-                date: "2021.03 — 2023.06",
-                company: "대한민국 육군",
-                role: "공보정훈 / 홍보문화장교, 중위 만기전역",
-                description:
-                  "장병 교육과 군 행사 기획 및 운영, 홍보 업무 담당. 군 인트라넷 UI 개선 공모전 참여.",
-                tag: "EXPERIENCE",
-              },
-              {
-                date: "2017.03 — 2021.02",
-                company: "경희대학교",
-                role: "글로벌커뮤니케이션학부 학사",
-                description: "GPA 4.02 / 4.5",
-                tag: "EDUCATION",
-              },
-            ].map((item) => (
-              <article key={item.company} className="journey-row" data-reveal>
-                <div className="journey-date">
-                  {item.date}
-                  <span>{item.tag}</span>
-                </div>
-                <div>
-                  <h3>{item.company}</h3>
-                  <p className="journey-role">{item.role}</p>
-                  <p>{item.description}</p>
-                </div>
-                <Arrow diagonal />
-              </article>
-            ))}
-          </div>
-          <div className="credentials" data-reveal>
-            <span className="eyebrow">CERTIFICATIONS</span>
-            <div>
-              <span>
-                정보처리기사 <small>2026.09</small>
-              </span>
-              <span>
-                AWS Solutions Architect – Associate <small>2026.02</small>
-              </span>
-              <span>
-                웹디자인기능사 <small>2024.04</small>
-              </span>
-              <span>
-                OPIc IH <small>2025.03</small>
-              </span>
+          <div className="journey-content">
+            <div className="journey-list">
+              {[
+                {
+                  date: "2026.07 — 2026.09",
+                  company: "신한투자증권",
+                  role: "ICT기획운영부 인턴",
+                  description:
+                    "금융 IT 운영 환경에서 로그 분석 AI Agent 기획, 설계, 개발 및 최종 발표.",
+                  tag: "EXPERIENCE",
+                },
+                {
+                  date: "2025.12 — 2026.07",
+                  company: "프로디지털아카데미 7기",
+                  role: "신한투자증권 / 970시간 수료",
+                  description:
+                    "금융 플랫폼과 클라우드, 풀스택 개발 학습. Pocket Stock 최종 프로젝트 최우수상.",
+                  tag: "EDUCATION",
+                },
+                {
+                  date: "2024.05 — 2025.12",
+                  company: "에코마케팅",
+                  role: "마케팅테크팀 프론트엔드 개발",
+                  description:
+                    "자사몰 개발, 데이터 트래킹, A/B 테스트 플랫폼과 Figma MCP 자동화 도구 개발.",
+                  tag: "EXPERIENCE",
+                },
+                {
+                  date: "2023.10 — 2024.03",
+                  company: "그린컴퓨터아카데미",
+                  role: "UI/UX 반응형 웹디자인 및 웹퍼블리셔 / 760시간 수료",
+                  description:
+                    "웹 표준과 반응형 UI, JavaScript 및 프론트엔드 프로젝트 학습.",
+                  tag: "EDUCATION",
+                },
+                {
+                  date: "2021.03 — 2023.06",
+                  company: "대한민국 육군",
+                  role: "공보정훈 / 홍보문화장교, 중위 만기전역",
+                  description:
+                    "장병 교육과 군 행사 기획 및 운영, 홍보 업무 담당. 군 인트라넷 UI 개선 공모전 참여.",
+                  tag: "EXPERIENCE",
+                },
+                {
+                  date: "2017.03 — 2021.02",
+                  company: "경희대학교",
+                  role: "글로벌커뮤니케이션학부 학사",
+                  description: "GPA 4.02 / 4.5",
+                  tag: "EDUCATION",
+                },
+              ].map((item) => (
+                <article key={item.company} className="journey-row" data-reveal>
+                  <div className="journey-date">
+                    {item.date}
+                    <span>{item.tag}</span>
+                  </div>
+                  <div>
+                    <h3>{item.company}</h3>
+                    <p className="journey-role">{item.role}</p>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="credentials" data-reveal>
+              <span className="eyebrow">CERTIFICATIONS</span>
+              <div>
+                <span>
+                  정보처리기사 <small>2026.09</small>
+                </span>
+                <span>
+                  AWS Solutions Architect – Associate <small>2026.02</small>
+                </span>
+                <span>
+                  웹디자인기능사 <small>2024.04</small>
+                </span>
+                <span>
+                  OPIc IH <small>2025.03</small>
+                </span>
+              </div>
             </div>
           </div>
         </section>
@@ -887,9 +773,9 @@ export default function App() {
           </a>
         </div>
         <a className="contact-title" href={`mailto:${profile.email}`}>
-          Let’s build
+          Have something
           <br />
-          <span>something good.</span>
+          <em>in mind?</em>
           <Arrow diagonal />
         </a>
         <div className="contact-links">
@@ -913,7 +799,7 @@ export default function App() {
         <div className="footer-bottom">
           <span>© 2026 JUNGIN WOO</span>
           <span>기획하고, 만들고, 개선합니다.</span>
-          <span>DESIGNED & DEVELOPED WITH CURIOSITY</span>
+          <span>BUILT WITH CARE.</span>
         </div>
       </footer>
       <CaseStudy
