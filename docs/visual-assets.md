@@ -21,7 +21,7 @@ Create one standalone design object for a calm, editorial software developer por
 
 ## 프로젝트 화면
 
-Pocket Stock, AIOps, SOLMate의 썸네일과 상세 화면은 기존 저장소의 실제 서비스 캡처 및 영상을 사용합니다. Figma MCP, ELO, solvPS의 썸네일은 구분을 위한 타이포그래피입니다.
+Pocket Stock, AIOps, SOLMate의 썸네일과 상세 화면은 기존 저장소의 실제 서비스 캡처 및 영상을 사용합니다. Figma MCP, ELO, solvPS는 사용자 요청으로 `d71b5e8`의 그래픽 표지를 복원했습니다. Figma→코드 도식, A/B 전환율 그래프, 개념 코드 창을 기존 색상과 글꼴로 표시합니다. 모바일에서는 코드가 잘리지 않도록 행간과 내부 여백을 조정했습니다. 새 이미지 생성은 수행하지 않았습니다.
 
 ## 이전 이미지 보관
 
