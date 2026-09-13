@@ -1217,6 +1217,14 @@ em {
   font-size: 11px;
   margin-top: 10px;
 }
+.gallery-solvps {
+  max-width: 699px;
+  margin-inline: auto;
+}
+.gallery-solvps img {
+  display: block;
+  border: 0;
+}
 .gallery-phone {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   padding: 26px;

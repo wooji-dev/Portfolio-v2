@@ -43,6 +43,12 @@ Create one standalone design object for a calm, editorial software developer por
 
 Pocket Stock, AIOps, SOLMate의 썸네일과 상세 화면은 기존 저장소의 실제 서비스 캡처 및 영상을 사용합니다. Figma MCP, ELO, solvPS는 사용자 요청으로 `d71b5e8`의 그래픽 표지를 복원했습니다. Figma→코드 도식, A/B 전환율 그래프, 개념 코드 창을 기존 색상과 글꼴로 표시합니다. 이후 요청에 따라 여섯 표지의 비율을 데스크톱 1.48:1, 모바일 1.45:1로 통일하고 왼쪽 위에 같은 형식의 분야명을 표시합니다. 코드는 표지 너비에 맞춰 글꼴과 여백을 조정합니다. 새 이미지 생성은 수행하지 않았습니다.
 
-## 이전 이미지 보관
+## solvPS 상세 이미지
+
+기존 `Portfolio_우정인.pdf`의 solvPS 소개에 포함된 노트북 목업을 재사용합니다. 팀 활동 랭킹, 학습 로드맵과 팀 코드 비교가 보이는 실제 서비스 화면입니다. PDF의 포함 이미지 `X55`(699 × 432)를 추출해 `public/imgs/solvps-team-dashboard.jpg`로 인코딩했습니다. 구도와 내용은 수정하지 않았고, 상세 페이지에서 원본 너비 이내로 표시합니다. 메인 프로젝트 표지는 기존 개념 코드 그래픽을 유지합니다.
+
+원본 위치: `/Users/woojung-in/Desktop/취업/Portfolio_우정인.pdf` (단일 긴 페이지의 solvPS 섹션).
+
+## 이전 생성 이미지 보관
 
 기존 `signal-loop`와 `quiet-loop`의 웹용 이미지 및 원본은 그대로 보관합니다. 해당 이미지들은 내장 image_gen으로 생성한 이전 시안이며, 각각의 프롬프트는 이 문서의 Git 기록에 남아 있습니다.
