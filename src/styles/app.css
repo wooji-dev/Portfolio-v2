@@ -226,20 +226,11 @@ em {
   height: clamp(230px, 21vw, 290px);
   isolation: isolate;
 }
-.playground-stage::before {
-  content: "";
-  position: absolute;
-  inset: 10% 12%;
-  border: 1px solid #deded6;
-  border-radius: 50%;
-  transform: rotate(calc(-25deg + var(--scroll-turn, 0deg)));
-  pointer-events: none;
-}
 .play-object {
   position: absolute;
   top: 0;
   left: 0;
-  width: 36%;
+  width: 43%;
   aspect-ratio: 1;
   padding: 0;
   background: none;
@@ -256,55 +247,22 @@ em {
 .play-object:focus-visible {
   outline-offset: 10px;
 }
-.play-star {
+.play-loop {
   z-index: 2;
 }
-.play-star img {
+.play-clover {
+  width: 25%;
+  z-index: 3;
+}
+.play-object img {
   position: absolute;
-  width: 170%;
+  width: 130%;
   max-width: none;
-  left: -35%;
-  top: -35%;
+  left: -15%;
+  top: -15%;
   pointer-events: none;
   mix-blend-mode: multiply;
-  mask-image: radial-gradient(ellipse at center, #000 45%, transparent 69%);
-}
-.play-tile {
-  width: 19%;
-  z-index: 3;
-  border-radius: 25%;
-}
-.play-ring {
-  width: 22%;
-  z-index: 3;
-}
-.shape-tile,
-.shape-ring {
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.shape-tile {
-  border-radius: 25%;
-  background: linear-gradient(145deg, #d5dfb9, #adbd88);
-  box-shadow:
-    inset 2px 2px 2px #f8ffe7b3,
-    3px 5px 0 #8b9a6b;
-}
-.shape-tile::after {
-  content: "";
-  position: absolute;
-  inset: 28%;
-  border: 2px solid #71814e;
-  border-radius: 28%;
-}
-.shape-ring {
-  border: clamp(11px, 1.3vw, 18px) solid #ec8c68;
-  border-radius: 50%;
-  box-shadow:
-    inset 2px 3px 0 #c77556,
-    2px 3px 0 #c77556;
+  mask-image: radial-gradient(ellipse at center, #000 53%, transparent 71%);
 }
 .playground-controls {
   display: flex;
@@ -1457,9 +1415,6 @@ em {
   .playground-controls {
     padding-top: 4px;
     font-size: 9px;
-  }
-  .shape-ring {
-    border-width: 12px;
   }
   .hero-intro {
     flex-direction: column;

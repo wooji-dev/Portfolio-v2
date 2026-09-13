@@ -1,6 +1,27 @@
 # 이미지 자산
 
-2026-09-13 리디자인의 메인 오브제는 **Higgsfield 연결 도구**에서 생성한 파란색의 둥근 별표 형태입니다. 초록 타일 및 코랄 링과 함께 메인 인터랙션에 사용합니다. 추가된 두 도형은 CSS로 만들었으며 새 이미지 파일이나 외부 라이브러리를 추가하지 않았습니다.
+2026-09-13 메인 오브제는 **Higgsfield 연결 도구**에서 새로 생성한 블루 글라스 루프와 라일락 클로버입니다. 두 이미지의 둥근 곡면, 빛의 방향과 반투명 유리 질감을 통일했습니다. 큰 루프와 작은 클로버를 대각선으로 배치하며 드래그, 관성, 충돌과 키보드 조작을 유지합니다.
+
+## 현재 글라스 오브제
+
+- 서비스 / 모델: Higgsfield / `gpt_image_2`
+- 설정: 각각 1:1, 1k, quality high, 1장.
+- 블루 루프 작업: `28262493-489f-49da-b0c6-e6118e57982b`
+- 라일락 클로버 작업: `29f1ba0c-fe15-4924-973f-1bbdebbc445c`
+- 웹용: `public/imgs/azure-loop.jpg` (1024 × 1024, 약 102 KiB), `public/imgs/lilac-clover.jpg` (1024 × 1024, 약 99 KiB).
+- 생성 원본: `design-assets/azure-loop-higgsfield.png`, `design-assets/lilac-clover-higgsfield.png`.
+- 정확한 생성 프롬프트와 작업 ID: `design-assets/glass-objects-prompts.json`.
+- 원본은 아이보리 배경을 포함합니다. JPEG로 인코딩하고 CSS multiply 및 가장자리 마스크로 페이지 배경에 연결합니다. 투명 PNG가 아닙니다.
+- 이미지 경로 및 인터랙션: `src/components/HeroPlayground.tsx`. 표시 크기 및 반응형 배치: `src/styles/app.css`.
+- 세 번째 조약돌 생성 요청은 크레딧 부족으로 접수되지 않았습니다. 완료된 두 이미지만 사용합니다. 사이트 실행에는 Higgsfield 계정이나 API 키가 필요하지 않습니다.
+
+### Pinterest 참고
+
+직접 확인한 [유리 매듭](https://in.pinterest.com/pin/920141767622636899/)의 연속적인 곡면과 [Khyati Trehan의 형태·색 조합](https://in.pinterest.com/pin/840062136732952339/), [굴절된 유리와 둥근 입체](https://co.pinterest.com/pin/343962490309893410/)를 참고했습니다. 레퍼런스의 금속 반사, 줄무늬, 많은 색과 복잡한 배치는 덜어냈습니다. 참고 이미지를 복사하거나 생성 도구에 업로드하지 않고 새 형태를 프롬프트로 생성했습니다.
+
+## 이전 별표 오브제
+
+이전 파란 별표 원본과 웹용 파일은 보관합니다. 초록 타일과 코랄 링을 그리던 CSS는 현재 메인에서 제거했습니다.
 
 - 서비스: Higgsfield
 - 생성 모델: `gpt_image_2`
@@ -9,9 +30,8 @@
 - 웹용 파일: `public/imgs/blue-asterisk.jpg` (1024 × 1024, 약 109 KiB)
 - 생성 원본: `design-assets/blue-asterisk-higgsfield.png`
 - JPEG는 원본을 웹 전송용으로 변환한 파일. 웹사이트 실행에는 Higgsfield 계정이나 API 키가 필요하지 않음.
-- 이미지 경로와 드래그·충돌 동작: `src/components/HeroPlayground.tsx`. 표시 크기와 두 보조 도형: `src/styles/app.css`.
 
-## 실제 생성 프롬프트
+### 이전 별표 생성 프롬프트
 
 ```text
 Create one standalone design object for a calm, editorial software developer portfolio. A single cobalt blue sculptural asterisk with six broad softly rounded arms, sculpted as one continuous solid piece. The shape is compact, playful but sophisticated, with a distinctive clear silhouette. Stylized 2.5D graphic, matte smooth clay-like finish with very soft volume and restrained shading; no photorealistic texture. Viewed nearly front-on with just a slight tilt to reveal thickness. Exact primary color vivid ultramarine blue #2455D6. Center the object on a completely plain warm ivory #F6F5F1 background with no floor, no horizon, no cast shadow. Object occupies 62% of a square canvas with generous equal empty margins. This is a tiny accent beside oversized typography, so prioritize an instantly readable simple silhouette and broad clean surfaces. No rings, no loop, no ribbon, no knot, no chrome, no glass, no wires, no fibers, no sparkles, no particles, no extra shapes, no text, no letters, no logos, no watermark, no UI. One object only. Clean, minimal contemporary editorial graphic.

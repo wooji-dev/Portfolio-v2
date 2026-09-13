@@ -1,0 +1,27 @@
+{
+  "service": "Higgsfield",
+  "model": "gpt_image_2",
+  "resolution": "1k",
+  "quality": "high",
+  "aspect_ratio": "1:1",
+  "references": [
+    "https://in.pinterest.com/pin/920141767622636899/",
+    "https://in.pinterest.com/pin/840062136732952339/",
+    "https://co.pinterest.com/pin/343962490309893410/"
+  ],
+  "assets": [
+    {
+      "index": 1,
+      "id": "azure-loop",
+      "prompt": "Create an original premium 3D editorial design object for a minimalist portfolio website. Standalone single object, softly sculpted volume, believable dimensional thickness, rounded flowing contour. Material is opaline translucent optical glass with a satin-smooth polished surface, subtle milky light scattering inside, delicate broad reflections and gentle refraction. Sophisticated restrained color, soft clear highlights, soft ambient occlusion only within the shape. One large softbox upper left with broad fill, bright airy light, no hard specular streaks, no black reflection bands. Slight three-quarter view, nearly frontal so the silhouette remains clear at small web sizes. Center the object in a square canvas, occupying about 76% of the canvas width and height, with generous empty margins. Perfectly uniform flat warm ivory #F6F5F1 background, including any visible central hole. No floor, horizon, environment, stand, cast shadow, drop shadow, extra objects, text, letters, logos, watermark, frame, checkerboard, stripes, texture grain, foil, rainbow chrome, metallic surface, wires, spikes or intricate details. This is one asset from a cohesive set of blue/lilac/clear glass forms. Refined, calm, beautiful, tactile, playful without looking like a children's toy. SUBJECT: a single plump rounded triangular loop with one large open center, very softly twisted at one corner. The tube has a thick smooth elliptical section and flows continuously, like an elegant piece of sculptural glass jewelry. It is NOT a tangled knot and has no crossing tubes. Color is clear icy periwinkle blue with a delicate lavender undertone, richer blue at thick edges and pale translucent blue at the highlights. Rounded triangular overall silhouette, one flowing opening.",
+      "jobId": "28262493-489f-49da-b0c6-e6118e57982b"
+    },
+    {
+      "index": 2,
+      "id": "lilac-clover",
+      "prompt": "Create an original premium 3D editorial design object for a minimalist portfolio website. Standalone single object, softly sculpted volume, believable dimensional thickness, rounded flowing contour. Material is opaline translucent optical glass with a satin-smooth polished surface, subtle milky light scattering inside, delicate broad reflections and gentle refraction. Sophisticated restrained color, soft clear highlights, soft ambient occlusion only within the shape. One large softbox upper left with broad fill, bright airy light, no hard specular streaks, no black reflection bands. Slight three-quarter view, nearly frontal so the silhouette remains clear at small web sizes. Center the object in a square canvas, occupying about 76% of the canvas width and height, with generous empty margins. Perfectly uniform flat warm ivory #F6F5F1 background, including any visible central hole. No floor, horizon, environment, stand, cast shadow, drop shadow, extra objects, text, letters, logos, watermark, frame, checkerboard, stripes, texture grain, foil, rainbow chrome, metallic surface, wires, spikes or intricate details. This is one asset from a cohesive set of blue/lilac/clear glass forms. Refined, calm, beautiful, tactile, playful without looking like a children's toy. SUBJECT: a single small four-lobed clover sculpture made from inflated, pillowy glass. Four broad softly domed petals merge seamlessly in the center, with gentle valleys between them. No holes, no sharp points, no stem, no flower details or marks. The overall silhouette is compact and softly scalloped. Color is translucent pale lavender and lilac with pearly opal highlights, gently bluer in the thicker center. Sculptural and understated, not a star icon.",
+      "jobId": "29f1ba0c-fe15-4924-973f-1bbdebbc445c"
+    }
+  ],
+  "note": "Third pebble image was not submitted because Higgsfield returned out of credits."
+}

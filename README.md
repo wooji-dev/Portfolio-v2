@@ -1,6 +1,6 @@
 # 우정인 — Interactive Portfolio
 
-React 18 + TypeScript + Vite 기반 GitHub Pages 포트폴리오입니다. 아이보리 바탕, 큰 타이포그래피, 힉스필드에서 생성한 파란 별표와 CSS로 만든 두 오브제로 구성했습니다. 7개 프로젝트, 분야별 필터, 프로젝트 상세 창, 실제 시연 영상, 기술 및 경력 타임라인을 제공합니다.
+React 18 + TypeScript + Vite 기반 GitHub Pages 포트폴리오입니다. 아이보리 바탕, 큰 타이포그래피, 힉스필드에서 생성한 블루 글라스 루프와 라일락 클로버로 구성했습니다. 7개 프로젝트, 분야별 필터, 프로젝트 상세 창, 실제 시연 영상, 기술 및 경력 타임라인을 제공합니다.
 
 ## 실행
 
@@ -28,7 +28,7 @@ npm run preview
 - `src/components/HeroPlayground.tsx`: 오브제 드래그, 관성, 충돌 및 키보드 조작.
 - `src/styles/tokens.css`: 색상과 글꼴.
 - `src/styles/app.css`: 반응형 레이아웃과 모션.
-- `public/imgs/blue-asterisk.jpg`: 힉스필드에서 생성한 첫 화면의 작은 오브제.
+- `public/imgs/azure-loop.jpg`, `public/imgs/lilac-clover.jpg`: 힉스필드에서 생성한 첫 화면의 글라스 오브제.
 
 프로젝트 상세는 `#pocketstock`, `#aiops`, `#solmate`, `#mcp`, `#elo`, `#solvps`, `#paytrace` 주소로 바로 열립니다. 이전 `#summary`, `#stack`, `#history` 링크도 관련 섹션으로 연결합니다.
 
@@ -41,7 +41,7 @@ npm run preview
 ## 접근성과 모션
 
 - 시맨틱 링크와 버튼, 네이티브 dialog, Esc 닫기, 키보드 포커스 표시.
-- 세 오브제의 드래그, 관성, 충돌, 클릭·터치 반응과 다시 모으기. Enter·Space 또는 방향키로도 조작합니다.
+- 두 오브제의 드래그, 관성, 충돌, 클릭·터치 반응과 다시 모으기. Enter·Space 또는 방향키로도 조작합니다.
 - 커서와 스크롤에 따라 움직이는 제목 및 오브제 영역.
 - `prefers-reduced-motion` 지원 및 첫 화면의 Motion on/off 버튼. 모션을 끄면 인터랙션 위치를 초기화하고 오브제 조작을 비활성화합니다.
 - 포인터와 스크롤 입력은 `requestAnimationFrame`으로 한 프레임에 한 번 처리합니다. 오브제 시뮬레이션은 움직임이 가라앉거나 탭이 숨겨지면 정지합니다.

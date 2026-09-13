@@ -25,7 +25,6 @@ export function useHeroInteraction(motion: boolean) {
         "--scroll-art",
         `${-progress * (desktop ? 65 : 20)}px`,
       );
-      hero.style.setProperty("--scroll-turn", `${progress * 32}deg`);
       hero.style.setProperty("--scroll-title", `${-progress * 18}px`);
       hero.style.setProperty(
         "--scroll-line",
