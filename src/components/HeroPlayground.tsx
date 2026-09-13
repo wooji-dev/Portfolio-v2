@@ -14,9 +14,22 @@ type Body = {
 };
 
 const objects = [
-  { id: "star", name: "파란 별표", x: 0.5, y: 0.46, angle: -8 },
-  { id: "tile", name: "초록 타일", x: 0.82, y: 0.24, angle: 16 },
-  { id: "ring", name: "코랄 링", x: 0.2, y: 0.72, angle: -20 },
+  {
+    id: "loop",
+    name: "블루 글라스 루프",
+    image: "azure-loop.jpg",
+    x: 0.43,
+    y: 0.59,
+    angle: -12,
+  },
+  {
+    id: "clover",
+    name: "라일락 글라스 클로버",
+    image: "lilac-clover.jpg",
+    x: 0.8,
+    y: 0.27,
+    angle: 15,
+  },
 ];
 
 export function HeroPlayground({ motion }: { motion: boolean }) {
@@ -127,7 +140,7 @@ export function HeroPlayground({ motion }: { motion: boolean }) {
           body.spin -= body.vx * 0.3;
         }
       });
-      // Three soft bodies: dragged objects push their neighbours, which keep their momentum.
+      // Dragged objects push their neighbours, which keep their momentum.
       for (let i = 0; i < bodies.length; i++) {
         for (let j = i + 1; j < bodies.length; j++) {
           const a = bodies[i]!;
@@ -297,7 +310,13 @@ export function HeroPlayground({ motion }: { motion: boolean }) {
     const observer = new ResizeObserver(layout);
     observer.observe(stage);
     layout();
-    if (motion) burst(0);
+    if (motion) {
+      bodies.forEach((body, index) => {
+        body.vy = index ? -2 : 2;
+        body.spin = 0.5;
+      });
+      wake();
+    }
     function visibility() {
       if (document.hidden) {
         cancelAnimationFrame(frame);
@@ -334,18 +353,14 @@ export function HeroPlayground({ motion }: { motion: boolean }) {
             aria-describedby="playground-hint playground-keys"
             aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight"
           >
-            {object.id === "star" ? (
-              <img
-                src={`${import.meta.env.BASE_URL}imgs/blue-asterisk.jpg`}
-                width="1024"
-                height="1024"
-                fetchPriority="high"
-                alt=""
-                draggable="false"
-              />
-            ) : (
-              <span className={`shape-${object.id}`} aria-hidden="true" />
-            )}
+            <img
+              src={`${import.meta.env.BASE_URL}imgs/${object.image}`}
+              width="1024"
+              height="1024"
+              fetchPriority="high"
+              alt=""
+              draggable="false"
+            />
           </button>
         ))}
       </div>
