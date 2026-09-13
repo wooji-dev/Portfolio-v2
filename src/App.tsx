@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { projects } from "./data/projects";
 import { profile } from "./data/profile";
+import { HeroPlayground } from "./components/HeroPlayground";
 import { useHeroInteraction } from "./hooks/useHeroInteraction";
 import type { Project } from "./types";
 
@@ -139,7 +140,6 @@ function ProjectVisual({ project }: { project: Project }) {
         className="project-visual legacy-visual elo-visual"
         aria-hidden="true"
       >
-        <span className="visual-caption top-caption">ELO / A/B TESTING</span>
         <div className="test-columns">
           <div>
             <span>CONTROL</span>
@@ -165,9 +165,6 @@ function ProjectVisual({ project }: { project: Project }) {
         className="project-visual legacy-visual solvps-visual"
         aria-hidden="true"
       >
-        <span className="visual-caption top-caption">
-          SOLVE TOGETHER. GROW TOGETHER.
-        </span>
         <div className="code-window">
           <div className="window-dots">
             <i />
@@ -367,7 +364,7 @@ export default function App() {
   );
   const [copied, setCopied] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
-  const { heroRef, spinRef, spinArt } = useHeroInteraction(motion);
+  const { heroRef } = useHeroInteraction(motion);
   const copyTimeout = useRef<ReturnType<typeof setTimeout>>();
   const activeProject = projects.find((project) => project.id === activeId);
   const visibleProjects = projects.filter(
@@ -547,29 +544,7 @@ export default function App() {
                 </span>
               </span>
             </h1>
-            <button
-              type="button"
-              className="hero-art-wrap"
-              onClick={spinArt}
-              disabled={!motion}
-              aria-label="파란 오브제 돌리기"
-            >
-              <span className="hero-art">
-                <span className="hero-art-spin" ref={spinRef}>
-                  <img
-                    src={asset("imgs/blue-asterisk.jpg")}
-                    width="1024"
-                    height="1024"
-                    fetchPriority="high"
-                    alt=""
-                    draggable="false"
-                  />
-                </span>
-              </span>
-              <span className="art-hint" aria-hidden="true">
-                Click / tap to spin
-              </span>
-            </button>
+            <HeroPlayground motion={motion} />
           </div>
           <div className="hero-intro">
             <p>
@@ -650,20 +625,16 @@ export default function App() {
                   onClick={() => openProject(project)}
                   aria-label={`${project.eyebrow} 프로젝트 상세 보기`}
                 >
-                  <div
-                    className={`project-image-wrap ${["mcp", "elo", "solvps"].includes(project.id) ? "legacy-cover" : ""}`}
-                  >
+                  <div className="project-image-wrap">
                     <ProjectVisual project={project} />
                     <span className="card-view">
                       <Arrow diagonal />
                     </span>
-                    {["mcp", "elo", "solvps"].includes(project.id) ? (
-                      <span className="card-number">
-                        {String(projects.indexOf(project) + 1).padStart(2, "0")}
-                      </span>
-                    ) : (
-                      <span className="card-category">{project.category}</span>
-                    )}
+                    <span
+                      className={`card-category ${project.id === "solvps" ? "is-light" : ""}`}
+                    >
+                      {project.category}
+                    </span>
                   </div>
                   <div className="project-title-row">
                     <h3>

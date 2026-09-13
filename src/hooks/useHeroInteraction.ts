@@ -2,8 +2,6 @@ import { useEffect, useRef } from "react";
 
 export function useHeroInteraction(motion: boolean) {
   const heroRef = useRef<HTMLElement>(null);
-  const spinRef = useRef<HTMLSpanElement>(null);
-  const turns = useRef(0);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -21,13 +19,7 @@ export function useHeroInteraction(motion: boolean) {
       const desktop = window.innerWidth > 760;
       const x =
         pointer && desktop ? (pointer.x - rect.left) / rect.width - 0.5 : 0;
-      const y =
-        pointer && desktop ? (pointer.y - rect.top) / rect.height - 0.5 : 0;
 
-      hero.style.setProperty("--pointer-x", `${x * 48}px`);
-      hero.style.setProperty("--pointer-y", `${y * 32}px`);
-      hero.style.setProperty("--tilt-x", `${-y * 18}deg`);
-      hero.style.setProperty("--tilt-y", `${x * 24}deg`);
       hero.style.setProperty("--title-x", `${-x * 6}px`);
       hero.style.setProperty(
         "--scroll-art",
@@ -71,18 +63,5 @@ export function useHeroInteraction(motion: boolean) {
     };
   }, [motion]);
 
-  useEffect(() => {
-    if (!motion) {
-      turns.current = 0;
-      spinRef.current?.style.removeProperty("--spin");
-    }
-  }, [motion]);
-
-  function spinArt() {
-    if (!motion) return;
-    turns.current += 1;
-    spinRef.current?.style.setProperty("--spin", `${turns.current * 360}deg`);
-  }
-
-  return { heroRef, spinRef, spinArt };
+  return { heroRef };
 }
