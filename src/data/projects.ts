@@ -369,10 +369,10 @@ export const projects: readonly Project[] = [
       {
         kind: "wide",
         title: "팀 활동 랭킹과 학습 로드맵",
-        hint: "기존 포트폴리오의 실제 서비스 화면 목업",
-        src: "imgs/solvps-team-dashboard.jpg",
-        size: { w: 699, h: 432 },
-        alt: "solvPS 팀 대시보드: 팀원의 활동 랭킹, 학습 로드맵과 팀 코드 비교가 표시된 노트북 화면",
+        hint: "사용자가 제공한 실제 서비스 화면",
+        src: "imgs/solvps-group-dashboard.jpg",
+        size: { w: 2880, h: 1800 },
+        alt: "solvPS 팀 대시보드: 팀원의 활동 랭킹, 학습 로드맵과 팀 코드 비교 화면",
       },
     ],
     meta: [
