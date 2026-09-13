@@ -846,6 +846,14 @@ export default function App() {
                 tag: "EDUCATION",
               },
               {
+                date: "2021.03 — 2023.06",
+                company: "대한민국 육군",
+                role: "공보정훈 / 홍보문화장교, 중위 만기전역",
+                description:
+                  "장병 교육과 군 행사 기획 및 운영, 홍보 업무 담당. 군 인트라넷 UI 개선 공모전 참여.",
+                tag: "EXPERIENCE",
+              },
+              {
                 date: "2017.03 — 2021.02",
                 company: "경희대학교",
                 role: "글로벌커뮤니케이션학부 학사",
