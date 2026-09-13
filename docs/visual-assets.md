@@ -1,6 +1,6 @@
 # 이미지 자산
 
-2026-09-13 리디자인의 메인 오브제는 **Higgsfield 연결 도구**에서 생성한 파란색의 둥근 별표 형태입니다. 화면에서는 작은 포인트 하나로 사용합니다.
+2026-09-13 리디자인의 메인 오브제는 **Higgsfield 연결 도구**에서 생성한 파란색의 둥근 별표 형태입니다. 초록 타일 및 코랄 링과 함께 메인 인터랙션에 사용합니다. 추가된 두 도형은 CSS로 만들었으며 새 이미지 파일이나 외부 라이브러리를 추가하지 않았습니다.
 
 - 서비스: Higgsfield
 - 생성 모델: `gpt_image_2`
@@ -9,7 +9,7 @@
 - 웹용 파일: `public/imgs/blue-asterisk.jpg` (1024 × 1024, 약 109 KiB)
 - 생성 원본: `design-assets/blue-asterisk-higgsfield.png`
 - JPEG는 원본을 웹 전송용으로 변환한 파일. 웹사이트 실행에는 Higgsfield 계정이나 API 키가 필요하지 않음.
-- 이미지 경로 및 크기: `src/App.tsx`의 hero-art. 표시 크기와 움직임: `src/styles/app.css`.
+- 이미지 경로와 드래그·충돌 동작: `src/components/HeroPlayground.tsx`. 표시 크기와 두 보조 도형: `src/styles/app.css`.
 
 ## 실제 생성 프롬프트
 
@@ -21,7 +21,7 @@ Create one standalone design object for a calm, editorial software developer por
 
 ## 프로젝트 화면
 
-Pocket Stock, AIOps, SOLMate의 썸네일과 상세 화면은 기존 저장소의 실제 서비스 캡처 및 영상을 사용합니다. Figma MCP, ELO, solvPS는 사용자 요청으로 `d71b5e8`의 그래픽 표지를 복원했습니다. Figma→코드 도식, A/B 전환율 그래프, 개념 코드 창을 기존 색상과 글꼴로 표시합니다. 모바일에서는 코드가 잘리지 않도록 행간과 내부 여백을 조정했습니다. 새 이미지 생성은 수행하지 않았습니다.
+Pocket Stock, AIOps, SOLMate의 썸네일과 상세 화면은 기존 저장소의 실제 서비스 캡처 및 영상을 사용합니다. Figma MCP, ELO, solvPS는 사용자 요청으로 `d71b5e8`의 그래픽 표지를 복원했습니다. Figma→코드 도식, A/B 전환율 그래프, 개념 코드 창을 기존 색상과 글꼴로 표시합니다. 이후 요청에 따라 여섯 표지의 비율을 데스크톱 1.48:1, 모바일 1.45:1로 통일하고 왼쪽 위에 같은 형식의 분야명을 표시합니다. 코드는 표지 너비에 맞춰 글꼴과 여백을 조정합니다. 새 이미지 생성은 수행하지 않았습니다.
 
 ## 이전 이미지 보관
 
