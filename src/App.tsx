@@ -470,11 +470,11 @@ export default function App() {
     const rect = event.currentTarget.getBoundingClientRect();
     heroArt.current?.style.setProperty(
       "--pointer-x",
-      `${((event.clientX - rect.left) / rect.width - 0.5) * 22}px`,
+      `${((event.clientX - rect.left) / rect.width - 0.5) * 10}px`,
     );
     heroArt.current?.style.setProperty(
       "--pointer-y",
-      `${((event.clientY - rect.top) / rect.height - 0.5) * 16}px`,
+      `${((event.clientY - rect.top) / rect.height - 0.5) * 8}px`,
     );
   }
   async function copyEmail() {
@@ -573,7 +573,6 @@ export default function App() {
                 Reliable
                 <br />
                 <span>systems.</span>
-                <span className="heading-period">↗</span>
               </h1>
               <p className="hero-description">
                 사용하기 쉬운 화면과
@@ -592,26 +591,12 @@ export default function App() {
             <div className="hero-art-wrap">
               <div className="hero-art" ref={heroArt}>
                 <img
-                  src={asset("imgs/signal-loop.jpg")}
+                  src={asset("imgs/quiet-loop.jpg")}
                   width="1536"
                   height="1024"
                   fetchPriority="high"
-                  alt="은빛과 라임빛 섬유가 연결된 추상적인 루프"
+                  alt="라임색 리본 하나가 부드럽게 이어진 추상적인 루프"
                 />
-              </div>
-              <div className="art-coordinate coordinate-top">[ INTERFACE ]</div>
-              <div className="art-coordinate coordinate-bottom">
-                [ INFRASTRUCTURE ]
-              </div>
-              <div className="art-note">
-                <span className="crosshair" aria-hidden="true">
-                  +
-                </span>
-                <span>
-                  EVERY DETAIL
-                  <br />
-                  IS CONNECTED.
-                </span>
               </div>
             </div>
           </div>

@@ -220,17 +220,8 @@ button:disabled {
   letter-spacing: -0.065em;
   white-space: nowrap;
 }
-.hero h1 > span:not(.heading-period) {
+.hero h1 > span {
   color: var(--lime);
-}
-.heading-period {
-  display: inline-block;
-  font-size: 0.66em;
-  vertical-align: middle;
-  margin-left: 25px;
-  transform: translateY(-7px);
-  font-family: var(--font-sans);
-  font-weight: 300;
 }
 .hero-description {
   margin-top: 34px;
@@ -283,7 +274,7 @@ button:disabled {
 }
 .hero-art-wrap {
   position: absolute;
-  inset: 28px -7vw 0 39%;
+  inset: 20px -5vw 0 41%;
   pointer-events: none;
 }
 .hero-art {
@@ -297,36 +288,8 @@ button:disabled {
 .hero-art img {
   width: 100%;
   mix-blend-mode: lighten;
-  mask-image: radial-gradient(ellipse at 52% 51%, #000 36%, transparent 72%);
-  animation: float 9s ease-in-out infinite;
-}
-.art-coordinate {
-  position: absolute;
-  font: 400 11px var(--font-mono);
-  letter-spacing: 0.12em;
-  color: #89927c;
-}
-.coordinate-top {
-  top: 11%;
-  left: 23%;
-}
-.coordinate-bottom {
-  bottom: 11%;
-  right: 20%;
-}
-.art-note {
-  position: absolute;
-  right: 14%;
-  top: 16%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font: 400 10px/1.6 var(--font-mono);
-  color: #aab19c;
-}
-.crosshair {
-  font-size: 40px;
-  font-weight: 200;
+  mask-image: radial-gradient(ellipse at center, #000 60%, transparent 72%);
+  animation: float 12s ease-in-out infinite;
 }
 .hero-bottom {
   position: relative;
@@ -1309,10 +1272,10 @@ button:disabled {
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0) rotate(-2deg);
+    transform: translateY(0) rotate(-1deg);
   }
   50% {
-    transform: translateY(-15px) rotate(1deg);
+    transform: translateY(-8px) rotate(1deg);
   }
 }
 @keyframes travel {
@@ -1347,7 +1310,7 @@ html[data-motion="off"] .will-reveal {
     min-height: 760px;
   }
   .hero-art-wrap {
-    inset: -40px -6vw 0 38%;
+    inset: -20px -4vw 0 41%;
   }
   .section-pad {
     padding-left: max(7vw, calc((100vw - 1550px) / 2));
@@ -1365,22 +1328,10 @@ html[data-motion="off"] .will-reveal {
     font-size: 72px;
   }
   .hero-art-wrap {
-    inset: 0 -16vw 0 36%;
+    inset: 24px -8vw 0 42%;
   }
   .hero-bottom p {
     display: none;
-  }
-  .art-note {
-    right: 23%;
-    top: 19%;
-  }
-  .coordinate-top {
-    left: 32%;
-    top: 10%;
-  }
-  .coordinate-bottom {
-    right: 30%;
-    bottom: 13%;
   }
   .section-heading > p {
     font-size: 14px;
@@ -1458,46 +1409,32 @@ html[data-motion="off"] .will-reveal {
     flex-direction: column;
     align-items: flex-start;
     padding: 45px 0 25px;
-    min-height: 840px;
+    min-height: 0;
   }
   .hero h1 {
     font-size: clamp(51px, 10.7vw, 80px);
     line-height: 1.02;
     letter-spacing: -0.06em;
   }
-  .heading-period {
-    margin-left: 22px;
-  }
   .hero-description {
     margin-top: 29px;
     font-size: 16px;
   }
   .hero-art-wrap {
-    inset: auto -38px 0 -38px;
-    height: 440px;
+    position: relative;
+    inset: auto;
+    align-self: center;
+    width: calc(100% + 48px);
+    margin-top: 36px;
   }
   .hero-art {
-    inset: 0;
+    position: relative;
+    inset: auto;
   }
   .hero-art img {
     width: 100%;
     max-width: 620px;
     margin: auto;
-  }
-  .art-note {
-    right: 15%;
-    top: 12%;
-    font-size: 9px;
-  }
-  .coordinate-top {
-    top: 16%;
-    left: 17%;
-    font-size: 9px;
-  }
-  .coordinate-bottom {
-    bottom: 10%;
-    right: 15%;
-    font-size: 9px;
   }
   .hero-bottom {
     padding: 21px 0;
@@ -1901,12 +1838,6 @@ html[data-motion="off"] .will-reveal {
 @media (max-width: 380px) {
   .hero-topline > span:last-child {
     display: none;
-  }
-  .hero-main {
-    min-height: 770px;
-  }
-  .hero-art-wrap {
-    height: 370px;
   }
   .hero h1 {
     font-size: 48px;
