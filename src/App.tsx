@@ -269,7 +269,9 @@ function CaseStudy({
           ))}
         </dl>
         {project.slots.length > 0 && (
-          <div className={`case-gallery gallery-${project.slotLayout}`}>
+          <div
+            className={`case-gallery gallery-${project.slotLayout} gallery-${project.id}`}
+          >
             {project.slots.map((slot) => (
               <figure
                 key={slot.title}

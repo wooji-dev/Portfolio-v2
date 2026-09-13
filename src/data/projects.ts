@@ -365,7 +365,16 @@ export const projects: readonly Project[] = [
     tags: ["Next.js", "Claude API", "AWS"],
     github: "https://github.com/SOLv4/solvPS",
     highlight: "Chrome 확장 프로그램 / AI 학습 분석",
-    slots: [],
+    slots: [
+      {
+        kind: "wide",
+        title: "팀 활동 랭킹과 학습 로드맵",
+        hint: "기존 포트폴리오의 실제 서비스 화면 목업",
+        src: "imgs/solvps-team-dashboard.jpg",
+        size: { w: 699, h: 432 },
+        alt: "solvPS 팀 대시보드: 팀원의 활동 랭킹, 학습 로드맵과 팀 코드 비교가 표시된 노트북 화면",
+      },
+    ],
     meta: [
       { label: "기간", value: "2026.02.27 — 2026.03.06" },
       {
